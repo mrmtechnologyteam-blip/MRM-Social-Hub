@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#100d19">
+
+<title>SOCIAL HUB</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+:root {
+    --bg: #f5f4fa;
+    --card: #ffffff;
+    --text: #191725;
+    --muted: #858194;
+    --accent: #8055ed;
+    --border: #eae7f1;
+}
+
+body.dark {
+    --bg: #100d19;
+    --card: #1b1727;
+    --text: #ffffff;
+    --muted: #aaa3bb;
+    --accent: #a17aff;
+    --border: #30283f;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: .3s;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 24px 18px 35px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.theme-btn {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    width: 43px;
+    height: 43px;
+    border-radius: 14px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.hero {
+    background: linear-gradient(135deg,#8055ed,#bd65e8);
+    color: white;
+    padding: 27px 22px;
+    border-radius: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 30px #8055ed30;
+}
+
+.hero h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 13px;
+    line-height: 1.9;
+    opacity: .9;
+}
+
+.section-title {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 17px;
+}
+
+.apps {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 13px;
+}
+
+.app {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: .2s;
+    color: var(--text);
+    min-width: 0;
+}
+
+.app:active {
+    transform: scale(.94);
+}
+
+.icon {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 12px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.app-name {
+    font-size: 13px;
+    font-weight: bold;
+    direction: ltr;
+}
+
+.wa { background: #25D366; }
+.tg { background: #229ED9; }
+.ig { background: linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5); }
+.fb { background: #1877F2; }
+.tt { background: #111111; }
+.yt { background: #FF0033; }
+.xx { background: #000000; }
+
+.footer {
+    text-align: center;
+    margin-top: 35px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 2;
+}
+
+.dialog-bg {
+    position: fixed;
+    inset: 0;
+    background: #0009;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10;
+}
+
+.dialog {
+    background: var(--card);
+    color: var(--text);
+    width: 100%;
+    max-width: 340px;
+    padding: 25px;
+    border-radius: 23px;
+    text-align: center;
+}
+
+.dialog h3 {
+    margin-bottom: 12px;
+}
+
+.dialog p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.dialog button {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.primary {
+    background: var(--accent);
+    color: white;
+}
+
+.secondary {
+    background: var(--bg);
+    color: var(--text);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="header">
+
+        <div class="logo">
+            SOCIAL <span>HUB</span>
+        </div>
+
+        <button class="theme-btn" onclick="changeTheme()" id="themeBtn">
+            ☾
+        </button>
+
+    </header>
+
+
+    <section class="hero">
+
+        <h1>همه شبکه‌ها، یک‌جا!</h1>
+
+        <p>
+            تمام شبکه‌های اجتماعی مورد علاقه‌ات
+            را از یک مکان مدیریت و اجرا کن.
+        </p>
+
+    </section>
+
+
+    <h2 class="section-title">
+        شبکه‌های اجتماعی
+    </h2>
+
+
+    <div class="apps">
+
+        <div class="app" onclick="openSocial('whatsapp')">
+            <div class="icon wa">WA</div>
+            <div class="app-name">WhatsApp</div>
+        </div>
+
+        <div class="app" onclick="openSocial('telegram')">
+            <div class="icon tg">TG</div>
+            <div class="app-name">Telegram</div>
+        </div>
+
+        <div class="app" onclick="openSocial('instagram')">
+            <div class="icon ig">IG</div>
+            <div class="app-name">Instagram</div>
+        </div>
+
+        <div class="app" onclick="openSocial('facebook')">
+            <div class="icon fb">f</div>
+            <div class="app-name">Facebook</div>
+        </div>
+
+        <div class="app" onclick="openSocial('tiktok')">
+            <div class="icon tt">♪</div>
+            <div class="app-name">TikTok</div>
+        </div>
+
+        <div class="app" onclick="openSocial('youtube')">
+            <div class="icon yt">▶</div>
+            <div class="app-name">YouTube</div>
+        </div>
+
+        <div class="app" onclick="openSocial('x')">
+            <div class="icon xx">𝕏</div>
+            <div class="app-name">X</div>
+        </div>
+
+    </div>
+
+
+    <footer class="footer">
+
+        SOCIAL HUB V1.0<br>
+        All Your Social Networks. One Place.
+
+    </footer>
+
+</div>
+
+
+<div class="dialog-bg" id="dialogBg">
+
+    <div class="dialog">
+
+        <h3 id="dialogTitle">انتخاب روش ورود</h3>
+
+        <p id="dialogText">
+            چگونه می‌خواهید وارد این شبکه اجتماعی شوید؟
+        </p>
+
+        <button class="primary" onclick="openStore()">
+            نصب از Google Play
+        </button>
+
+        <button class="secondary" onclick="openWeb()">
+            استفاده از نسخه وب
+        </button>
+
+        <button class="secondary" onclick="closeDialog()">
+            بستن
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const socials = {
+
+    whatsapp: {
+        name: "WhatsApp",
+        package: "com.whatsapp",
+        web: "https://web.whatsapp.com/"
+    },
+
+    telegram: {
+        name: "Telegram",
+        package: "org.telegram.messenger",
+        web: "https://web.telegram.org/"
+    },
+
+    instagram: {
+        name: "Instagram",
+        package: "com.instagram.android",
+        web: "https://www.instagram.com/"
+    },
+
+    facebook: {
+        name: "Facebook",
+        package: "com.facebook.katana",
+        web: "https://www.facebook.com/"
+    },
+
+    tiktok: {
+        name: "TikTok",
+        package: "com.zhiliaoapp.musically",
+        web: "https://www.tiktok.com/"
+    },
+
+    youtube: {
+        name: "YouTube",
+        package: "com.google.android.youtube",
+        web: "https://m.youtube.com/"
+    },
+
+    x: {
+        name: "X",
+        package: "com.twitter.android",
+        web: "https://x.com/"
+    }
+
+};
+
+
+let selectedSocial = null;
+
+
+function openSocial(name) {
+
+    selectedSocial = socials[name];
+
+    if (!selectedSocial) return;
+
+    // ارتباط با Android Native
+
+    if (
+        window.Android &&
+        typeof Android.openSocial === "function"
+    ) {
+
+        Android.openSocial(name);
+
+    } else {
+
+        showDialog();
+
+    }
+
+}
+
+
+function showDialog() {
+
+    document.getElementById("dialogTitle").innerText =
+        selectedSocial.name;
+
+    document.getElementById("dialogBg").style.display =
+        "flex";
+
+}
+
+
+function closeDialog() {
+
+    document.getElementById("dialogBg").style.display =
+        "none";
+
+}
+
+
+function openStore() {
+
+    if (!selectedSocial) return;
+
+    const url =
+        "https://play.google.com/store/apps/details?id=" +
+        selectedSocial.package;
+
+    window.open(url, "_blank");
+
+}
+
+
+function openWeb() {
+
+    if (!selectedSocial) return;
+
+    window.open(selectedSocial.web, "_blank");
+
+}
+
+
+function changeTheme() {
+
+    const isDark = document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "socialhub-theme",
+        isDark ? "dark" : "light"
+    );
+
+    document.getElementById("themeBtn").innerText =
+        isDark ? "☀" : "☾";
+
+}
+
+
+function loadTheme() {
+
+    const theme = localStorage.getItem("socialhub-theme");
+
+    if (theme === "dark") {
+
+        document.body.classList.add("dark");
+
+        document.getElementById("themeBtn").innerText = "☀";
+
+    }
+
+}
+
+
+loadTheme();
+
+</script>
+
+</body>
+</html>
