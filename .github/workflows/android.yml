@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
 
 permissions:
@@ -15,32 +16,67 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. دریافت کدهای پروژه
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # 2. نصب Java 17
       - name: Setup Java 17
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
 
+      # 3. آماده‌سازی Android SDK
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
+        with:
+          packages: 'platform-tools'
 
+      # 4. نصب SDK و Build Tools مورد نیاز
       - name: Install Android SDK 35
         run: |
           sdkmanager "platforms;android-35"
           sdkmanager "build-tools;35.0.0"
           sdkmanager "platform-tools"
 
-      - name: Install Gradle
+      # 5. نصب Gradle 8.9
+      - name: Setup Gradle 8.9
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
 
-      - name: Build Debug APK
-        run: gradle assembleDebug
+      # 6. بررسی ساختار پروژه
+      - name: Verify Project Files
+        run: |
+          echo "Checking project files..."
 
+          test -f settings.gradle
+          test -f build.gradle
+          test -f app/build.gradle
+          test -f app/src/main/AndroidManifest.xml
+          test -f app/src/main/assets/index.html
+          
+          echo "All required files found."
+
+      # 7. ساخت APK
+      - name: Build Debug APK
+        run: gradle --no-daemon assembleDebug
+
+      # 8. بررسی وجود APK
+      - name: Verify APK
+        run: |
+          APK="app/build/outputs/apk/debug/app-debug.apk"
+
+          if [ ! -f "$APK" ]; then
+            echo "ERROR: APK file was not generated."
+            exit 1
+          fi
+
+          echo "APK generated successfully."
+          ls -lh "$APK"
+
+      # 9. بارگذاری APK برای دریافت
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
