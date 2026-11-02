@@ -3,616 +3,1108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#09051b">
+<meta name="theme-color" content="#080515">
 <title>MRM Social Hub</title>
 
 <style>
+
+/* =================================
+   MRM SOCIAL HUB V2
+   COMPLETE UI SYSTEM
+================================= */
+
 :root{
---bg:#080515;
---panel:#15102b;
---panel2:#21143c;
---text:#fff;
---muted:#b9adce;
---line:rgba(190,145,255,.18);
---shadow:0 12px 32px rgba(0,0,0,.28)
+    --bg:#080515;
+    --panel:#15102b;
+    --panel2:#21143c;
+    --text:#ffffff;
+    --muted:#b9adce;
+    --line:rgba(190,145,255,.18);
+    --accent:#d45cff;
+    --accent2:#9b20ff;
+    --shadow:0 12px 32px rgba(0,0,0,.28);
 }
 
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:Arial,Tahoma,sans-serif
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-min-height:100vh;
-background:radial-gradient(ellipse at 50% -15%,#32105b 0%,#100a25 42%,var(--bg) 76%);
-color:var(--text);
-padding-bottom:88px;
-transition:background .25s
+    min-height:100vh;
+    background:
+        radial-gradient(ellipse at 50% -15%,#32105b 0%,#100a25 42%,var(--bg) 76%);
+    color:var(--text);
+    padding-bottom:95px;
+    transition:background .25s,color .25s;
 }
 
 body.light{
---bg:#f5f0fc;
---panel:#fff;
---panel2:#eee5fa;
---text:#241535;
---muted:#766887;
---line:rgba(83,38,130,.15);
---shadow:0 10px 26px rgba(60,30,90,.09);
-background:linear-gradient(180deg,#eee1ff,#f8f5fc 45%,#f5f0fc)
+    --bg:#f5f0fc;
+    --panel:#ffffff;
+    --panel2:#eee5fa;
+    --text:#241535;
+    --muted:#766887;
+    --line:rgba(83,38,130,.15);
+    --shadow:0 10px 26px rgba(60,30,90,.09);
+
+    background:linear-gradient(
+        180deg,
+        #eee1ff,
+        #f8f5fc 45%,
+        #f5f0fc
+    );
 }
 
-button,input{font:inherit}
-button{cursor:pointer;color:inherit}
+button,input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+    color:inherit;
+    -webkit-tap-highlight-color:transparent;
+}
 
 .app{
-max-width:620px;
-margin:auto;
-padding:17px 16px 20px
+    max-width:620px;
+    margin:auto;
+    padding:17px 16px 25px;
 }
 
-/* HEADER */
+/* =================================
+   HEADER
+================================= */
 
 .header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-margin:4px 1px 20px
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:4px 1px 20px;
 }
 
 .brand{
-display:flex;
-align-items:center;
-gap:11px
+    display:flex;
+    align-items:center;
+    gap:11px;
 }
 
 .logo{
-width:46px;
-height:46px;
-border-radius:15px;
-display:grid;
-place-items:center;
-background:linear-gradient(145deg,#17224d,#080c25);
-border:1px solid #9864ff;
-box-shadow:0 0 19px #7928d766;
-color:#fff;
-font-size:16px;
-font-weight:900;
-letter-spacing:-1px
+    position:relative;
+    width:52px;
+    height:52px;
+    flex-shrink:0;
+    display:grid;
+    place-items:center;
+    border-radius:17px;
+
+    background:
+        radial-gradient(circle at 30% 20%,#493080,#17103a 55%,#080515);
+
+    border:1px solid #b45cff;
+
+    box-shadow:
+        0 0 12px #9b20ff88,
+        inset 0 0 12px #9b20ff33;
+
+    color:#fff;
+    font-size:17px;
+    font-weight:900;
+    letter-spacing:-1px;
+    text-shadow:0 0 12px #d45cff;
+    overflow:hidden;
 }
 
-.brand h2{font-size:17px}
-.brand h2 span{color:#d45cff}
+.logo:before{
+    content:"";
+    position:absolute;
+    width:38px;
+    height:38px;
+    border:1px solid #d45cff88;
+    border-radius:50%;
+    box-shadow:0 0 10px #9b20ff55;
+}
+
+.logo:after{
+    content:"";
+    position:absolute;
+    width:7px;
+    height:7px;
+    top:5px;
+    right:6px;
+    border-radius:50%;
+    background:#d45cff;
+    box-shadow:0 0 10px #d45cff;
+}
+
+.brand h2{
+    font-size:17px;
+}
+
+.brand h2 span{
+    color:#d45cff;
+}
 
 .brand small{
-display:block;
-color:var(--muted);
-font-size:9px;
-letter-spacing:1.4px;
-margin-top:4px
+    display:block;
+    color:var(--muted);
+    font-size:9px;
+    letter-spacing:1.4px;
+    margin-top:4px;
 }
 
-.header-actions{display:flex;gap:8px}
+.header-actions{
+    display:flex;
+    gap:8px;
+}
 
 .icon-btn{
-width:39px;
-height:39px;
-border-radius:13px;
-border:1px solid var(--line);
-background:var(--panel);
-font-size:18px
+    width:40px;
+    height:40px;
+    border-radius:13px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    font-size:18px;
+    transition:.2s;
 }
 
-/* LANGUAGE */
+.icon-btn:active{
+    transform:scale(.92);
+}
+
+/* =================================
+   LANGUAGE SWITCH
+================================= */
 
 .language-switch{
-display:flex;
-padding:4px;
-border:1px solid #8f4bdb66;
-border-radius:30px;
-background:var(--panel);
-margin-bottom:19px;
-box-shadow:var(--shadow)
+    display:flex;
+    padding:4px;
+    border:1px solid #8f4bdb66;
+    border-radius:30px;
+    background:var(--panel);
+    margin-bottom:19px;
+    box-shadow:var(--shadow);
 }
 
 .language-switch button{
-flex:1;
-border:0;
-background:transparent;
-border-radius:25px;
-padding:11px 8px;
-font-size:13px;
-color:var(--muted)
+    flex:1;
+    border:0;
+    background:transparent;
+    border-radius:25px;
+    padding:11px 8px;
+    font-size:13px;
+    color:var(--muted);
 }
 
 .language-switch button.selected{
-color:white;
-background:linear-gradient(100deg,#7020d8,#b52cff);
-box-shadow:0 4px 15px #8c22e866
+    color:white;
+    background:linear-gradient(100deg,#7020d8,#b52cff);
+    box-shadow:0 4px 15px #8c22e866;
 }
 
-/* HERO */
+/* =================================
+   HERO SECTION
+================================= */
 
 .hero{
-position:relative;
-overflow:hidden;
-border:1px solid #9b55ff66;
-border-radius:22px;
-padding:20px 19px;
-margin-bottom:23px;
-background:radial-gradient(circle at 88% 20%,#8c28d755,transparent 37%),linear-gradient(120deg,#241047,#0d0a24 72%);
-box-shadow:0 10px 30px #4b16a333
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+    border:1px solid #a855f799;
+    border-radius:25px;
+    padding:24px 20px;
+    margin-bottom:23px;
+    min-height:190px;
+
+    background:
+        radial-gradient(circle at 90% 15%,#a855f755,transparent 35%),
+        radial-gradient(circle at 5% 100%,#6d28d955,transparent 40%),
+        linear-gradient(125deg,#241047,#100a25 65%,#080515);
+
+    box-shadow:
+        0 12px 35px #4b16a344,
+        inset 0 0 25px #9b20ff12;
+
+    animation:mrmFadeUp .65s ease both;
+}
+
+.hero:before{
+    content:"";
+    position:absolute;
+    width:170px;
+    height:170px;
+    border:1px solid #d45cff66;
+    border-radius:50%;
+    right:-75px;
+    top:15px;
+
+    box-shadow:
+        0 0 0 15px #9b20ff12,
+        0 0 0 32px #9b20ff0c,
+        0 0 30px #d45cff33;
+
+    z-index:-1;
 }
 
 .hero:after{
-content:"";
-position:absolute;
-width:180px;
-height:180px;
-border:1px solid #b15cff55;
-border-radius:50%;
-left:-75px;
-top:18px;
-box-shadow:0 0 0 15px #9b20ff0d,0 0 0 32px #9b20ff0a
+    content:"";
+    position:absolute;
+    width:90px;
+    height:90px;
+    border:1px solid #d45cff44;
+    border-radius:50%;
+    left:-35px;
+    bottom:-35px;
+    box-shadow:0 0 25px #9b20ff44;
+    z-index:-1;
 }
 
 .hero-tag{
-display:inline-block;
-padding:5px 10px;
-border-radius:20px;
-background:#ffffff18;
-color:#e7caff;
-font-size:10px;
-margin-bottom:11px
+    display:inline-block;
+    padding:6px 12px;
+    border:1px solid #d45cff66;
+    border-radius:30px;
+    background:#ffffff12;
+    color:#e9caff;
+    font-size:10px;
+    margin-bottom:15px;
+    letter-spacing:1px;
 }
 
 .hero h1{
-font-size:21px;
-margin-bottom:8px;
-position:relative;
-z-index:1
+    font-size:23px;
+    font-weight:900;
+    margin-bottom:10px;
+    position:relative;
+    z-index:1;
+    color:#fff;
 }
 
 .hero p{
-font-size:11px;
-line-height:1.9;
-color:#d7c8ed;
-max-width:78%;
-position:relative;
-z-index:1
+    font-size:12px;
+    line-height:2;
+    color:#dfd0f2;
+    max-width:85%;
+    position:relative;
+    z-index:1;
+}
+
+.hero-stats{
+    display:flex;
+    gap:9px;
+    margin-top:17px;
+    position:relative;
+    z-index:2;
+}
+
+.hero-stat{
+    padding:7px 12px;
+    border-radius:12px;
+    background:#ffffff12;
+    border:1px solid #ffffff20;
+    color:#f0ddff;
+    font-size:10px;
+}
+
+.hero-stat strong{
+    color:#fff;
+    font-size:13px;
+    margin-left:4px;
 }
 
 .hero-brand{
-position:absolute;
-left:18px;
-bottom:13px;
-font-weight:900;
-font-size:35px;
-color:#ffffff12;
-letter-spacing:2px
+    position:absolute;
+    left:18px;
+    bottom:12px;
+    font-weight:1000;
+    font-size:48px;
+    color:#ffffff12;
+    letter-spacing:3px;
+    pointer-events:none;
 }
 
-/* SEARCH */
+/* =================================
+   SEARCH
+================================= */
 
 .search-box{
-position:relative;
-margin-bottom:22px
+    position:relative;
+    margin-bottom:22px;
+    isolation:isolate;
+}
+
+.search-box:before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:17px;
+    background:linear-gradient(
+        110deg,
+        #7020d8,
+        #d45cff,
+        #7020d8
+    );
+    opacity:.35;
+    z-index:-1;
+    filter:blur(7px);
 }
 
 .search-box input{
-width:100%;
-height:47px;
-border:1px solid var(--line);
-border-radius:15px;
-background:var(--panel);
-color:var(--text);
-padding:0 43px 0 14px;
-outline:none;
-font-size:12px;
-box-shadow:var(--shadow)
+    width:100%;
+    height:53px;
+    border:1px solid var(--line);
+    border-radius:15px;
+    background:var(--panel);
+    color:var(--text);
+    padding:0 48px 0 15px;
+    outline:none;
+    font-size:12px;
+    box-shadow:var(--shadow);
+    transition:border-color .25s,box-shadow .25s;
 }
 
-.search-box input:focus{border-color:#a34bff}
+.search-box input:focus{
+    border-color:#b45cff;
+    box-shadow:
+        0 0 0 3px #9b20ff18,
+        0 0 18px #9b20ff22;
+}
+
+.search-box input::placeholder{
+    color:var(--muted);
+    opacity:.85;
+}
 
 .search-icon{
-position:absolute;
-right:15px;
-top:12px;
-color:var(--muted);
-font-size:19px
+    position:absolute;
+    right:16px;
+    top:14px;
+    color:#c77aff;
+    font-size:23px;
+    pointer-events:none;
+    transition:transform .25s;
 }
 
-/* SECTIONS */
+.search-box:focus-within .search-icon{
+    transform:scale(1.15);
+    color:#e2a5ff;
+}
+
+/* =================================
+   SECTION HEADINGS
+================================= */
 
 .section-heading{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:13px
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:13px;
 }
 
-.section-heading h3{font-size:15px}
+.section-heading h3{
+    font-size:15px;
+}
 
 .section-heading span{
-font-size:10px;
-color:var(--muted)
+    font-size:10px;
+    color:var(--muted);
 }
 
-/* SOCIAL NETWORKS */
+/* =================================
+   SOCIAL NETWORK CARDS
+================================= */
 
 .social-grid{
-display:grid;
-grid-template-columns:repeat(3,minmax(0,1fr));
-gap:10px
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:12px;
 }
 
 .social-card{
-min-width:0;
-position:relative;
-text-align:center;
-padding:13px 7px 12px;
-border:1px solid var(--line);
-border-radius:18px;
-background:linear-gradient(155deg,var(--panel2),var(--panel));
-box-shadow:var(--shadow);
-transition:transform .16s
+    min-width:0;
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    padding:17px 8px 13px;
+    border:1px solid var(--line);
+    border-radius:21px;
+
+    background:
+        radial-gradient(circle at 50% 0%,#9b20ff16,transparent 65%),
+        linear-gradient(155deg,var(--panel2),var(--panel));
+
+    box-shadow:var(--shadow);
+    transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+    animation:mrmFadeUp .45s ease both;
 }
 
-.social-card:active{transform:scale(.96)}
+.social-card:before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:20%;
+    width:60%;
+    height:2px;
+    background:linear-gradient(90deg,transparent,#d45cff,transparent);
+    opacity:.7;
+}
+
+.social-card:active{
+    transform:scale(.95);
+    border-color:#b45cff;
+    box-shadow:0 0 18px #9b20ff33;
+}
+
+.social-card:nth-child(1){animation-delay:.04s}
+.social-card:nth-child(2){animation-delay:.08s}
+.social-card:nth-child(3){animation-delay:.12s}
+.social-card:nth-child(4){animation-delay:.16s}
+.social-card:nth-child(5){animation-delay:.20s}
+.social-card:nth-child(6){animation-delay:.24s}
+.social-card:nth-child(7){animation-delay:.28s}
 
 .social-icon{
-width:57px;
-height:57px;
-margin:0 auto 9px;
-border-radius:18px;
-display:grid;
-place-items:center;
-color:#fff;
-font-size:30px;
-font-weight:bold;
-box-shadow:0 6px 15px #0004
+    width:61px;
+    height:61px;
+    margin:3px auto 12px;
+    border-radius:20px;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    font-size:31px;
+    font-weight:bold;
+
+    box-shadow:
+        0 8px 18px #0005,
+        inset 0 1px 2px #ffffff44;
+
+    transition:transform .25s ease;
 }
 
-.whatsapp{background:#08c957}
-.telegram{background:#229ed9}
+.social-card:active .social-icon{
+    transform:scale(1.08) rotate(-4deg);
+}
+
+.whatsapp{
+    background:linear-gradient(145deg,#35ed83,#08a84b);
+}
+
+.telegram{
+    background:linear-gradient(145deg,#48c8ff,#1685c4);
+}
 
 .instagram{
-background:linear-gradient(135deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5)
+    background:linear-gradient(
+        135deg,
+        #feda75,
+        #fa7e1e,
+        #d62976,
+        #962fbf,
+        #4f5bd5
+    );
 }
 
-.facebook{background:#1877f2}
+.facebook{
+    background:linear-gradient(145deg,#3995ff,#1455c7);
+}
 
 .tiktok{
-background:#050505;
-border:1px solid #555;
-text-shadow:-2px 1px #25f4ee,2px -1px #fe2c55
+    background:linear-gradient(145deg,#222,#050505);
+    border:1px solid #555;
+    text-shadow:-2px 1px #25f4ee,2px -1px #fe2c55;
 }
 
-.youtube{background:#f00020}
+.youtube{
+    background:linear-gradient(145deg,#ff4545,#d90020);
+}
 
 .x-social{
-background:#050505;
-border:1px solid #555
+    background:linear-gradient(145deg,#333,#050505);
+    border:1px solid #555;
 }
 
 .social-card h4{
-font-size:12px;
-margin-bottom:5px;
-white-space:nowrap
+    font-size:12px;
+    font-weight:900;
+    margin-bottom:6px;
+    white-space:nowrap;
 }
 
 .social-card p{
-font-size:9px;
-line-height:1.5;
-color:var(--muted);
-min-height:14px;
-margin-bottom:9px
+    font-size:9px;
+    line-height:1.7;
+    color:var(--muted);
+    min-height:18px;
+    margin-bottom:11px;
 }
 
 .open-btn{
-width:100%;
-border:0;
-border-radius:9px;
-padding:8px 3px;
-background:linear-gradient(100deg,#7020d8,#ae2eff);
-font-size:10px;
-font-weight:bold;
-color:#fff
+    width:100%;
+    border:1px solid #d45cff55;
+    border-radius:11px;
+    padding:9px 3px;
+    background:linear-gradient(110deg,#7020d8,#ae2eff);
+    color:#fff;
+    font-size:10px;
+    font-weight:900;
+    box-shadow:0 4px 12px #8b2be544;
+    transition:transform .2s,filter .2s;
+}
+
+.open-btn:active{
+    transform:scale(.94);
+    filter:brightness(1.2);
 }
 
 .favorite{
-position:absolute;
-top:7px;
-left:7px;
-border:0;
-background:transparent;
-color:#a99bb9;
-font-size:16px;
-padding:2px
+    position:absolute;
+    top:8px;
+    left:8px;
+    z-index:3;
+    width:25px;
+    height:25px;
+    display:grid;
+    place-items:center;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:var(--panel);
+    color:#a99bb9;
+    font-size:15px;
+    padding:0;
 }
 
-.favorite.active{color:#ffc94d}
+.favorite.active{
+    color:#ffc94d;
+    border-color:#ffc94d66;
+    background:#ffc94d18;
+}
 
-/* PROMO */
+/* =================================
+   PROMO
+================================= */
 
 .promo{
-display:flex;
-align-items:center;
-gap:12px;
-margin-top:20px;
-padding:15px;
-border-radius:18px;
-border:1px solid #8c3bff66;
-background:radial-gradient(circle at 10% 50%,#8725ff55,transparent 48%),linear-gradient(110deg,#241044,#100a29);
-box-shadow:var(--shadow)
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:20px;
+    padding:15px;
+    border-radius:18px;
+    border:1px solid #8c3bff66;
+
+    background:
+        radial-gradient(circle at 10% 50%,#8725ff55,transparent 48%),
+        linear-gradient(110deg,#241044,#100a29);
+
+    box-shadow:var(--shadow);
 }
 
-.promo-icon{font-size:34px}
-.promo h3{font-size:13px;margin-bottom:5px}
+.promo-icon{
+    font-size:34px;
+}
+
+.promo h3{
+    font-size:13px;
+    margin-bottom:5px;
+}
 
 .promo p{
-font-size:10px;
-line-height:1.6;
-color:#d5c4e8
+    font-size:10px;
+    line-height:1.6;
+    color:#d5c4e8;
 }
 
-/* PAGES */
+/* =================================
+   PAGES AND EMPTY STATES
+================================= */
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+    animation:mrmFadeUp .3s ease both;
+}
 
 .empty{
-display:none;
-text-align:center;
-padding:25px 8px;
-color:var(--muted);
-font-size:12px
+    display:none;
+    text-align:center;
+    padding:25px 8px;
+    color:var(--muted);
+    font-size:12px;
 }
 
-.page{display:none}
-.page.active{display:block}
-
-/* SETTINGS */
+/* =================================
+   SETTINGS
+================================= */
 
 .setting-card{
-padding:16px;
-border:1px solid var(--line);
-border-radius:17px;
-background:var(--panel);
-margin-bottom:12px;
-box-shadow:var(--shadow)
+    position:relative;
+    overflow:hidden;
+    padding:18px;
+    border:1px solid var(--line);
+    border-radius:19px;
+
+    background:
+        radial-gradient(circle at 100% 0%,#9b20ff12,transparent 55%),
+        var(--panel);
+
+    margin-bottom:14px;
+    box-shadow:var(--shadow);
+    transition:border-color .25s,transform .25s;
+}
+
+.setting-card:active{
+    border-color:#a855f766;
+}
+
+.setting-card:before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:4px;
+    height:42px;
+    border-radius:0 0 5px 5px;
+    background:linear-gradient(#d45cff,#7020d8);
+    opacity:.8;
 }
 
 .setting-card h4{
-font-size:13px;
-margin-bottom:7px
+    font-size:14px;
+    font-weight:900;
+    margin-bottom:9px;
 }
 
 .setting-card p{
-font-size:11px;
-color:var(--muted);
-line-height:1.8
+    font-size:11px;
+    color:var(--muted);
+    line-height:1.9;
 }
 
 .setting-row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-margin-top:12px
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-top:16px;
 }
 
 .setting-row button{
-border:1px solid var(--line);
-background:var(--panel2);
-padding:9px 14px;
-border-radius:10px;
-font-size:11px
+    flex:1;
+    min-height:39px;
+    border:1px solid var(--line);
+    background:var(--panel2);
+    color:var(--text);
+    padding:9px 12px;
+    border-radius:12px;
+    font-size:11px;
+    font-weight:700;
+    transition:all .2s ease;
 }
 
 .setting-row button.selected{
-background:linear-gradient(100deg,#7020d8,#ae2eff);
-color:#fff
+    border-color:#bd70ff;
+    background:linear-gradient(110deg,#7020d8,#ae2eff);
+    color:#fff;
+    box-shadow:0 5px 15px #8b2be544;
 }
 
-/* ABOUT PAGE */
+.setting-row button:active{
+    transform:scale(.96);
+}
+
+.setting-row span{
+    font-size:11px;
+    color:var(--muted);
+}
+
+/* =================================
+   ABOUT PAGE
+================================= */
 
 .about-box{
-text-align:center;
-padding:26px 18px;
-border-radius:21px;
-border:1px solid var(--line);
-background:var(--panel);
-box-shadow:var(--shadow)
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    padding:30px 19px;
+    border-radius:24px;
+    border:1px solid #a855f755;
+
+    background:
+        radial-gradient(circle at 50% 0%,#9b20ff20,transparent 45%),
+        linear-gradient(155deg,var(--panel2),var(--panel));
+
+    box-shadow:var(--shadow);
 }
 
-/* MRM ABOUT LOGO */
-
 .about-logo{
-position:relative;
-width:190px;
-height:190px;
-margin:15px auto 25px;
-border:0;
-border-radius:50%;
-background:radial-gradient(circle,#24104d,#09051b 72%);
-box-shadow:0 0 35px #9b20ff55
+    position:relative;
+    width:190px;
+    height:190px;
+    margin:15px auto 27px;
+    border:1px solid #b45cff88;
+    border-radius:50%;
+
+    background:
+        radial-gradient(circle,#39206a,#150d30 65%,#080515);
+
+    box-shadow:
+        0 0 25px #9b20ff55,
+        inset 0 0 25px #d45cff22;
+
+    animation:mrmGlow 4s ease-in-out infinite;
 }
 
 .about-core{
-position:absolute;
-width:100px;
-height:100px;
-top:45px;
-left:45px;
-border-radius:27px;
-background:linear-gradient(145deg,#25245e,#080c25);
-border:2px solid #b45cff;
-box-shadow:0 0 25px #9b20ff88;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:3
+    position:absolute;
+    width:105px;
+    height:105px;
+    top:42px;
+    left:42px;
+    border-radius:30px;
+    background:linear-gradient(145deg,#39246b,#080c25);
+    border:2px solid #d45cff;
+
+    box-shadow:
+        0 0 25px #9b20ff99,
+        inset 0 0 15px #d45cff22;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:3;
 }
 
 .about-core strong{
-font-size:29px;
-color:white;
-letter-spacing:1px
+    font-size:31px;
+    color:white;
+    letter-spacing:1px;
+    text-shadow:0 0 15px #d45cff;
 }
 
 .about-core span{
-font-size:8px;
-color:#d45cff;
-letter-spacing:2px
+    font-size:8px;
+    color:#e2a5ff;
+    letter-spacing:2px;
 }
 
 .about-orbit{
-position:absolute;
-border:1px solid #a34bff66;
-border-radius:50%;
-inset:5px
+    position:absolute;
+    border:1px solid #c77aff88;
+    border-radius:50%;
+    inset:5px;
+    box-shadow:0 0 12px #9b20ff22;
+    animation:mrmOrbit 25s linear infinite;
 }
 
 .orbit-two{
-inset:20px;
-border-style:dashed;
-opacity:.6
+    inset:20px;
+    border-style:dashed;
+    opacity:.7;
+    animation:mrmOrbit 35s linear infinite reverse;
 }
 
 .orbit-icon{
-position:absolute;
-width:31px;
-height:31px;
-display:grid;
-place-items:center;
-border-radius:50%;
-color:white;
-font-size:16px;
-font-weight:bold;
-border:1px solid #ffffff55;
-box-shadow:0 0 12px #9b20ff66;
-z-index:4
+    position:absolute;
+    width:33px;
+    height:33px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    border:1px solid #ffffff66;
+    box-shadow:0 0 13px #9b20ff77;
+    z-index:4;
 }
 
 .icon-x{
-top:0;
-left:80px;
-background:#111
+    top:0;
+    left:78px;
+    background:#111;
 }
 
 .icon-tg{
-top:27px;
-right:8px;
-background:#229ed9
+    top:27px;
+    right:8px;
+    background:#229ed9;
 }
 
 .icon-wa{
-bottom:27px;
-right:8px;
-background:#08c957
+    bottom:27px;
+    right:8px;
+    background:#08c957;
 }
 
 .icon-tt{
-bottom:0;
-left:80px;
-background:#111
+    bottom:0;
+    left:78px;
+    background:#111;
 }
 
 .icon-fb{
-bottom:27px;
-left:8px;
-background:#1877f2
+    bottom:27px;
+    left:8px;
+    background:#1877f2;
 }
 
 .icon-ig{
-top:27px;
-left:8px;
-background:#d62976
+    top:27px;
+    left:8px;
+    background:#d62976;
 }
 
 .icon-yt{
-top:80px;
-right:-5px;
-background:#f00020
+    top:78px;
+    right:-5px;
+    background:#f00020;
 }
 
 .about-box h2{
-font-size:20px;
-margin-bottom:9px
+    font-size:22px;
+    font-weight:1000;
+    margin-bottom:12px;
+    color:var(--text);
+    text-shadow:0 0 15px #9b20ff22;
 }
 
 .about-box p{
-font-size:12px;
-line-height:2;
-color:var(--muted)
+    font-size:12px;
+    line-height:2.1;
+    color:var(--muted);
 }
 
 .version{
-margin-top:17px;
-color:#d45cff;
-font-size:11px;
-letter-spacing:1px
+    display:inline-block;
+    margin-top:19px;
+    padding:7px 17px;
+    border:1px solid #b45cff66;
+    border-radius:30px;
+    background:#9b20ff18;
+    color:#dca5ff;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:1px;
 }
 
-/* FOOTER */
+/* =================================
+   FOOTER
+================================= */
 
 .footer{
-text-align:center;
-color:var(--muted);
-font-size:9px;
-line-height:1.9;
-margin-top:24px
+    text-align:center;
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.9;
+    margin-top:24px;
 }
 
-/* BOTTOM NAVIGATION */
+/* =================================
+   BOTTOM NAVIGATION
+================================= */
 
 .bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-max-width:620px;
-margin:auto;
-display:flex;
-justify-content:space-around;
-padding:10px 7px calc(10px + env(safe-area-inset-bottom));
-background:var(--panel);
-border-top:1px solid var(--line);
-z-index:5
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    max-width:620px;
+    margin:auto;
+
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+
+    padding:10px 7px calc(10px + env(safe-area-inset-bottom));
+
+    background:rgba(15,10,32,.94);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border-top:1px solid #a855f755;
+    box-shadow:0 -8px 28px #0004;
+    z-index:10;
 }
 
 .nav-item{
-border:0;
-background:transparent;
-color:var(--muted);
-font-size:9px;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:4px;
-min-width:58px
+    position:relative;
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    font-size:10px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+
+    min-width:62px;
+    padding:5px 9px;
+    border-radius:13px;
+
+    transition:all .25s ease;
 }
 
 .nav-item b{
-font-size:20px;
-font-weight:normal
+    font-size:22px;
+    font-weight:normal;
+    line-height:1.2;
+    transition:transform .25s ease;
 }
 
-.nav-item.active{color:#d45cff}
+.nav-item span{
+    font-size:9px;
+    font-weight:600;
+}
+
+.nav-item.active{
+    color:#e2a5ff;
+    background:#9b20ff20;
+    box-shadow:inset 0 0 12px #9b20ff12;
+}
+
+.nav-item.active b{
+    color:#d45cff;
+    transform:translateY(-2px) scale(1.12);
+    text-shadow:0 0 12px #d45cff88;
+}
+
+.nav-item.active:before{
+    content:"";
+    position:absolute;
+    top:-10px;
+    width:23px;
+    height:3px;
+    border-radius:10px;
+    background:#d45cff;
+    box-shadow:0 0 12px #d45cff;
+}
+
+.nav-item:active{
+    transform:scale(.92);
+}
+
+/* =================================
+   ANIMATIONS
+================================= */
+
+@keyframes mrmFadeUp{
+    from{
+        opacity:0;
+        transform:translateY(16px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes mrmGlow{
+    0%,100%{
+        box-shadow:0 0 20px #9b20ff33;
+    }
+
+    50%{
+        box-shadow:0 0 35px #d45cff77;
+    }
+}
+
+@keyframes mrmOrbit{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media(max-width:380px){
+
+    .hero{
+        padding:20px 15px;
+    }
+
+    .hero h1{
+        font-size:20px;
+    }
+
+    .hero p{
+        max-width:100%;
+    }
+
+    .social-grid{
+        gap:8px;
+    }
+
+    .social-card{
+        padding:14px 5px 11px;
+        border-radius:17px;
+    }
+
+    .social-icon{
+        width:51px;
+        height:51px;
+        font-size:27px;
+        border-radius:16px;
+    }
+
+    .social-card h4{
+        font-size:11px;
+    }
+
+    .about-logo{
+        transform:scale(.9);
+        margin-top:5px;
+        margin-bottom:15px;
+    }
+}
 
 @media(max-width:350px){
-.app{padding-left:11px;padding-right:11px}
-.social-grid{gap:7px}
-.social-card{padding:11px 5px}
-.social-icon{width:49px;height:49px;font-size:26px}
-.social-card h4{font-size:11px}
-.hero h1{font-size:18px}
-.about-logo{
-transform:scale(.9);
-margin-top:5px;
-margin-bottom:15px
+
+    .app{
+        padding-left:11px;
+        padding-right:11px;
+    }
+
+    .nav-item{
+        min-width:54px;
+        padding:5px 6px;
+    }
+
+    .nav-item b{
+        font-size:20px;
+    }
 }
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *:before,
+    *:after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+        transition-duration:.01ms !important;
+    }
 }
+
 </style>
 </head>
 
@@ -620,73 +1112,152 @@ margin-bottom:15px
 
 <div class="app">
 
-<header class="header">
-<div class="brand">
-<div class="logo">MRM</div>
-<div>
-<h2>MRM <span>Social Hub</span></h2>
-<small>DIGITAL CONNECTION</small>
-</div>
-</div>
+<!-- HEADER -->
 
-<div class="header-actions">
-<button class="icon-btn" onclick="toggleTheme()" aria-label="Theme">◐</button>
-<button class="icon-btn" onclick="showPage('settings')" aria-label="Settings">⚙</button>
-</div>
+<header class="header">
+
+    <div class="brand">
+
+        <div class="logo">MRM</div>
+
+        <div>
+            <h2>MRM <span>Social Hub</span></h2>
+            <small>DIGITAL CONNECTION</small>
+        </div>
+
+    </div>
+
+    <div class="header-actions">
+
+        <button class="icon-btn"
+                onclick="toggleTheme()"
+                aria-label="Theme">
+            ◐
+        </button>
+
+        <button class="icon-btn"
+                onclick="showPage('settings')"
+                aria-label="Settings">
+            ⚙
+        </button>
+
+    </div>
+
 </header>
 
+<!-- LANGUAGE SWITCH -->
+
 <div class="language-switch">
-<button id="enTop" onclick="setLanguage('en')">◎ English</button>
-<button id="faTop" class="selected" onclick="setLanguage('fa')">文 فارسی</button>
+
+    <button id="enTop" onclick="setLanguage('en')">
+        ◎ English
+    </button>
+
+    <button id="faTop"
+            class="selected"
+            onclick="setLanguage('fa')">
+        文 فارسی
+    </button>
+
 </div>
 
 <!-- HOME PAGE -->
 
 <main id="homePage" class="page active">
 
-<section class="hero">
-<span class="hero-tag" data-fa="نسخه ۲.۰" data-en="VERSION 2.0">نسخه ۲.۰</span>
+    <section class="hero">
 
-<h1 data-fa="دنیای ارتباطات، یک‌جا!" data-en="Your Social World, One Place!">
-دنیای ارتباطات، یک‌جا!
-</h1>
+        <span class="hero-tag"
+              data-fa="نسخه ۲.۰ | مرکز ارتباطات دیجیتال"
+              data-en="VERSION 2.0 | DIGITAL CONNECTION HUB">
+            نسخه ۲.۰ | مرکز ارتباطات دیجیتال
+        </span>
 
-<p data-fa="به MRM Social Hub خوش آمدید؛ شبکه‌های اجتماعی محبوب خود را سریع و آسان باز کنید."
-data-en="Welcome to MRM Social Hub. Open your favorite social networks quickly and easily.">
-به MRM Social Hub خوش آمدید؛ شبکه‌های اجتماعی محبوب خود را سریع و آسان باز کنید.
-</p>
+        <h1
+            data-fa="دنیای ارتباطات، یک‌جا!"
+            data-en="Your Social World, One Place!">
+            دنیای ارتباطات، یک‌جا!
+        </h1>
 
-<div class="hero-brand">MRM</div>
-</section>
+        <p
+            data-fa="به MRM Social Hub خوش آمدید؛ شبکه‌های اجتماعی محبوب خود را سریع، آسان و در یک فضای واحد باز کنید."
+            data-en="Welcome to MRM Social Hub. Access your favorite social networks quickly and easily in one place.">
+            به MRM Social Hub خوش آمدید؛ شبکه‌های اجتماعی محبوب خود را سریع، آسان و در یک فضای واحد باز کنید.
+        </p>
 
-<div class="search-box">
-<span class="search-icon">⌕</span>
-<input type="search" id="searchInput"
-placeholder="جست‌وجوی شبکه اجتماعی..."
-oninput="renderCards()">
-</div>
+        <div class="hero-stats">
 
-<div class="section-heading">
-<h3 id="sectionTitle">شبکه‌های اجتماعی</h3>
-<span id="networkCount">۷ شبکه</span>
-</div>
+            <div class="hero-stat">
+                <strong>07</strong>
+                <span data-fa="شبکه اجتماعی"
+                      data-en="Social Networks">
+                    شبکه اجتماعی
+                </span>
+            </div>
 
-<section class="social-grid" id="socialGrid"></section>
+            <div class="hero-stat">
+                <strong>02.0</strong>
+                <span data-fa="نسخه"
+                      data-en="Version">
+                    نسخه
+                </span>
+            </div>
 
-<div class="empty" id="emptyMessage">
-شبکه اجتماعی مورد نظر پیدا نشد.
-</div>
+        </div>
 
-<section class="promo">
-<div class="promo-icon">🚀</div>
-<div>
-<h3>MRM Social Hub</h3>
-<p data-fa="ارتباط بیشتر، تجربه بهتر"
-data-en="More Connections, A Better Experience">
-ارتباط بیشتر، تجربه بهتر
-</p>
-</div>
-</section>
+        <div class="hero-brand">MRM</div>
+
+    </section>
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <span class="search-icon">⌕</span>
+
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="جست‌وجوی شبکه اجتماعی..."
+            oninput="renderCards()">
+
+    </div>
+
+    <div class="section-heading">
+
+        <h3 id="sectionTitle">
+            شبکه‌های اجتماعی
+        </h3>
+
+        <span id="networkCount">
+            ۷ شبکه
+        </span>
+
+    </div>
+
+    <section class="social-grid" id="socialGrid"></section>
+
+    <div class="empty" id="emptyMessage">
+        شبکه اجتماعی مورد نظر پیدا نشد.
+    </div>
+
+    <section class="promo">
+
+        <div class="promo-icon">🚀</div>
+
+        <div>
+
+            <h3>MRM Social Hub</h3>
+
+            <p
+                data-fa="ارتباط بیشتر، تجربه بهتر"
+                data-en="More Connections, A Better Experience">
+                ارتباط بیشتر، تجربه بهتر
+            </p>
+
+        </div>
+
+    </section>
 
 </main>
 
@@ -694,21 +1265,27 @@ data-en="More Connections, A Better Experience">
 
 <main id="favoritesPage" class="page">
 
-<div class="section-heading">
-<h3 data-fa="علاقه‌مندی‌های من" data-en="My Favorites">
-علاقه‌مندی‌های من
-</h3>
+    <div class="section-heading">
 
-<span data-fa="شبکه‌های منتخب" data-en="Selected Networks">
-شبکه‌های منتخب
-</span>
-</div>
+        <h3
+            data-fa="علاقه‌مندی‌های من"
+            data-en="My Favorites">
+            علاقه‌مندی‌های من
+        </h3>
 
-<section class="social-grid" id="favoriteGrid"></section>
+        <span
+            data-fa="شبکه‌های منتخب"
+            data-en="Selected Networks">
+            شبکه‌های منتخب
+        </span>
 
-<div class="empty" id="favoriteEmpty">
-هنوز شبکه‌ای به علاقه‌مندی‌ها اضافه نکرده‌اید.
-</div>
+    </div>
+
+    <section class="social-grid" id="favoriteGrid"></section>
+
+    <div class="empty" id="favoriteEmpty">
+        هنوز شبکه‌ای به علاقه‌مندی‌ها اضافه نکرده‌اید.
+    </div>
 
 </main>
 
@@ -716,73 +1293,115 @@ data-en="More Connections, A Better Experience">
 
 <main id="settingsPage" class="page">
 
-<div class="section-heading">
-<h3 data-fa="تنظیمات برنامه" data-en="App Settings">
-تنظیمات برنامه
-</h3>
-</div>
+    <div class="section-heading">
 
-<div class="setting-card">
+        <h3
+            data-fa="تنظیمات برنامه"
+            data-en="App Settings">
+            تنظیمات برنامه
+        </h3>
 
-<h4 data-fa="🌐 زبان برنامه" data-en="🌐 App Language">
-🌐 زبان برنامه
-</h4>
+    </div>
 
-<p data-fa="زبان مورد نظر خود را انتخاب کنید."
-data-en="Choose your preferred language.">
-زبان مورد نظر خود را انتخاب کنید.
-</p>
+    <div class="setting-card">
 
-<div class="setting-row">
-<button id="faButton" onclick="setLanguage('fa')" class="selected">فارسی</button>
-<button id="enButton" onclick="setLanguage('en')">English</button>
-</div>
+        <h4
+            data-fa="🌐 زبان برنامه"
+            data-en="🌐 App Language">
+            🌐 زبان برنامه
+        </h4>
 
-</div>
+        <p
+            data-fa="زبان مورد نظر خود را انتخاب کنید."
+            data-en="Choose your preferred language.">
+            زبان مورد نظر خود را انتخاب کنید.
+        </p>
 
-<div class="setting-card">
+        <div class="setting-row">
 
-<h4 data-fa="🎨 ظاهر برنامه" data-en="🎨 Appearance">
-🎨 ظاهر برنامه
-</h4>
+            <button id="faButton"
+                    onclick="setLanguage('fa')"
+                    class="selected">
+                فارسی
+            </button>
 
-<p data-fa="حالت روشن یا تاریک را انتخاب کنید."
-data-en="Choose light or dark mode.">
-حالت روشن یا تاریک را انتخاب کنید.
-</p>
+            <button id="enButton"
+                    onclick="setLanguage('en')">
+                English
+            </button>
 
-<div class="setting-row">
-<button id="darkButton" onclick="setTheme('dark')" class="selected">تاریک</button>
-<button id="lightButton" onclick="setTheme('light')">روشن</button>
-</div>
+        </div>
 
-</div>
+    </div>
 
-<div class="setting-card">
+    <div class="setting-card">
 
-<h4 data-fa="❤️ علاقه‌مندی‌ها" data-en="❤️ Favorites">
-❤️ علاقه‌مندی‌ها
-</h4>
+        <h4
+            data-fa="🎨 ظاهر برنامه"
+            data-en="🎨 Appearance">
+            🎨 ظاهر برنامه
+        </h4>
 
-<p data-fa="با انتخاب ستاره روی هر شبکه، آن را به علاقه‌مندی‌ها اضافه کنید."
-data-en="Tap the star on a network card to add it to your favorites.">
-با انتخاب ستاره روی هر شبکه، آن را به علاقه‌مندی‌ها اضافه کنید.
-</p>
+        <p
+            data-fa="حالت روشن یا تاریک را انتخاب کنید."
+            data-en="Choose light or dark mode.">
+            حالت روشن یا تاریک را انتخاب کنید.
+        </p>
 
-</div>
+        <div class="setting-row">
 
-<div class="setting-card">
+            <button id="darkButton"
+                    onclick="setTheme('dark')"
+                    class="selected">
+                تاریک
+            </button>
 
-<h4 data-fa="📱 اطلاعات برنامه" data-en="📱 App Information">
-📱 اطلاعات برنامه
-</h4>
+            <button id="lightButton"
+                    onclick="setTheme('light')">
+                روشن
+            </button>
 
-<div class="setting-row">
-<span data-fa="نسخه برنامه" data-en="App Version">نسخه برنامه</span>
-<span>2.0</span>
-</div>
+        </div>
 
-</div>
+    </div>
+
+    <div class="setting-card">
+
+        <h4
+            data-fa="❤️ علاقه‌مندی‌ها"
+            data-en="❤️ Favorites">
+            ❤️ علاقه‌مندی‌ها
+        </h4>
+
+        <p
+            data-fa="با انتخاب ستاره روی هر شبکه، آن را به علاقه‌مندی‌ها اضافه کنید."
+            data-en="Tap the star on any network card to add it to your favorites.">
+            با انتخاب ستاره روی هر شبکه، آن را به علاقه‌مندی‌ها اضافه کنید.
+        </p>
+
+    </div>
+
+    <div class="setting-card">
+
+        <h4
+            data-fa="📱 اطلاعات برنامه"
+            data-en="📱 App Information">
+            📱 اطلاعات برنامه
+        </h4>
+
+        <div class="setting-row">
+
+            <span
+                data-fa="نسخه برنامه"
+                data-en="App Version">
+                نسخه برنامه
+            </span>
+
+            <span>2.0</span>
+
+        </div>
+
+    </div>
 
 </main>
 
@@ -790,49 +1409,58 @@ data-en="Tap the star on a network card to add it to your favorites.">
 
 <main id="aboutPage" class="page">
 
-<div class="about-box">
+    <div class="about-box">
 
-<div class="about-logo">
+        <div class="about-logo">
 
-<div class="about-orbit"></div>
-<div class="about-orbit orbit-two"></div>
+            <div class="about-orbit"></div>
+            <div class="about-orbit orbit-two"></div>
 
-<div class="about-core">
-<strong>MRM</strong>
-<span>SOCIAL HUB</span>
-</div>
+            <div class="about-core">
 
-<div class="orbit-icon icon-x">𝕏</div>
-<div class="orbit-icon icon-tg">➤</div>
-<div class="orbit-icon icon-wa">◉</div>
-<div class="orbit-icon icon-tt">♪</div>
-<div class="orbit-icon icon-fb">f</div>
-<div class="orbit-icon icon-ig">◎</div>
-<div class="orbit-icon icon-yt">▶</div>
+                <strong>MRM</strong>
+                <span>SOCIAL HUB</span>
 
-</div>
+            </div>
 
-<h2>MRM Social Hub</h2>
+            <div class="orbit-icon icon-x">𝕏</div>
+            <div class="orbit-icon icon-tg">➤</div>
+            <div class="orbit-icon icon-wa">◉</div>
+            <div class="orbit-icon icon-tt">♪</div>
+            <div class="orbit-icon icon-fb">f</div>
+            <div class="orbit-icon icon-ig">◎</div>
+            <div class="orbit-icon icon-yt">▶</div>
 
-<p data-fa="یک پلتفرم ساده و کاربردی برای دسترسی سریع به شبکه‌های اجتماعی محبوب شما."
-data-en="A simple and useful platform for quick access to your favorite social networks.">
-یک پلتفرم ساده و کاربردی برای دسترسی سریع به شبکه‌های اجتماعی محبوب شما.
-</p>
+        </div>
 
-<div class="version">VERSION 2.0</div>
+        <h2>MRM Social Hub</h2>
 
-<p style="margin-top:18px">
-MRM Technology Team<br>
-Digital Solutions
-</p>
+        <p
+            data-fa="یک پلتفرم ساده و کاربردی برای دسترسی سریع به شبکه‌های اجتماعی محبوب شما."
+            data-en="A simple and useful platform for quick access to your favorite social networks.">
+            یک پلتفرم ساده و کاربردی برای دسترسی سریع به شبکه‌های اجتماعی محبوب شما.
+        </p>
 
-</div>
+        <div class="version">
+            VERSION 2.0
+        </div>
+
+        <p style="margin-top:18px">
+            MRM Technology Team<br>
+            Digital Solutions
+        </p>
+
+    </div>
 
 </main>
 
+<!-- FOOTER -->
+
 <footer class="footer">
-MRM TECHNOLOGY TEAM<br>
-DIGITAL SOLUTIONS
+
+    MRM TECHNOLOGY TEAM<br>
+    DIGITAL SOLUTIONS
+
 </footer>
 
 </div>
@@ -841,361 +1469,499 @@ DIGITAL SOLUTIONS
 
 <nav class="bottom-nav">
 
-<button class="nav-item active" onclick="showPage('home')">
-<b>⌂</b>
-<span data-fa="خانه" data-en="Home">خانه</span>
-</button>
+    <button class="nav-item active"
+            onclick="showPage('home',0)">
 
-<button class="nav-item" onclick="showPage('favorites')">
-<b>♡</b>
-<span data-fa="علاقه‌مندی" data-en="Favorites">علاقه‌مندی</span>
-</button>
+        <b>⌂</b>
 
-<button class="nav-item" onclick="focusSearch()">
-<b>⌕</b>
-<span data-fa="جست‌وجو" data-en="Search">جست‌وجو</span>
-</button>
+        <span data-fa="خانه"
+              data-en="Home">
+            خانه
+        </span>
 
-<button class="nav-item" onclick="showPage('about')">
-<b>ⓘ</b>
-<span data-fa="درباره ما" data-en="About">درباره ما</span>
-</button>
+    </button>
+
+    <button class="nav-item"
+            onclick="showPage('favorites',1)">
+
+        <b>♡</b>
+
+        <span data-fa="علاقه‌مندی"
+              data-en="Favorites">
+            علاقه‌مندی
+        </span>
+
+    </button>
+
+    <button class="nav-item"
+            onclick="focusSearch()">
+
+        <b>⌕</b>
+
+        <span data-fa="جست‌وجو"
+              data-en="Search">
+            جست‌وجو
+        </span>
+
+    </button>
+
+    <button class="nav-item"
+            onclick="showPage('about',3)">
+
+        <b>ⓘ</b>
+
+        <span data-fa="درباره ما"
+              data-en="About">
+            درباره ما
+        </span>
+
+    </button>
 
 </nav>
 
 <script>
 
-/* SOCIAL NETWORK DATA */
+/* =================================
+   SOCIAL NETWORK DATA
+================================= */
 
 const networks=[
 
-{
-id:"x",
-name:"X",
-icon:"𝕏",
-style:"x-social",
-fa:"اخبار و گفتگوهای آنلاین",
-en:"News and conversations",
-url:"https://x.com/"
-},
+    {
+        id:"x",
+        name:"X",
+        icon:"𝕏",
+        style:"x-social",
+        fa:"اخبار و گفتگوهای آنلاین",
+        en:"News and conversations",
+        url:"https://x.com/"
+    },
 
-{
-id:"telegram",
-name:"Telegram",
-icon:"➤",
-style:"telegram",
-fa:"پیام‌رسان تلگرام",
-en:"Fast messaging platform",
-url:"https://web.telegram.org/"
-},
+    {
+        id:"telegram",
+        name:"Telegram",
+        icon:"➤",
+        style:"telegram",
+        fa:"پیام‌رسان تلگرام",
+        en:"Fast messaging platform",
+        url:"https://web.telegram.org/"
+    },
 
-{
-id:"whatsapp",
-name:"WhatsApp",
-icon:"◉",
-style:"whatsapp",
-fa:"پیام‌رسان واتساپ",
-en:"Messaging and calls",
-url:"https://www.whatsapp.com/"
-},
+    {
+        id:"whatsapp",
+        name:"WhatsApp",
+        icon:"◉",
+        style:"whatsapp",
+        fa:"پیام‌رسان واتساپ",
+        en:"Messaging and calls",
+        url:"https://www.whatsapp.com/"
+    },
 
-{
-id:"tiktok",
-name:"TikTok",
-icon:"♪",
-style:"tiktok",
-fa:"ویدیوهای کوتاه و سرگرمی",
-en:"Short videos and entertainment",
-url:"https://www.tiktok.com/"
-},
+    {
+        id:"tiktok",
+        name:"TikTok",
+        icon:"♪",
+        style:"tiktok",
+        fa:"ویدیوهای کوتاه و سرگرمی",
+        en:"Short videos and entertainment",
+        url:"https://www.tiktok.com/"
+    },
 
-{
-id:"facebook",
-name:"Facebook",
-icon:"f",
-style:"facebook",
-fa:"شبکه اجتماعی فیسبوک",
-en:"Connect with people",
-url:"https://www.facebook.com/"
-},
+    {
+        id:"facebook",
+        name:"Facebook",
+        icon:"f",
+        style:"facebook",
+        fa:"شبکه اجتماعی فیسبوک",
+        en:"Connect with people",
+        url:"https://www.facebook.com/"
+    },
 
-{
-id:"instagram",
-name:"Instagram",
-icon:"◎",
-style:"instagram",
-fa:"اشتراک‌گذاری عکس و ویدیو",
-en:"Photos and videos",
-url:"https://www.instagram.com/"
-},
+    {
+        id:"instagram",
+        name:"Instagram",
+        icon:"◎",
+        style:"instagram",
+        fa:"اشتراک‌گذاری عکس و ویدیو",
+        en:"Photos and videos",
+        url:"https://www.instagram.com/"
+    },
 
-{
-id:"youtube",
-name:"YouTube",
-icon:"▶",
-style:"youtube",
-fa:"تماشای ویدیو و آموزش",
-en:"Videos and learning",
-url:"https://www.youtube.com/"
-}
+    {
+        id:"youtube",
+        name:"YouTube",
+        icon:"▶",
+        style:"youtube",
+        fa:"تماشای ویدیو و آموزش",
+        en:"Videos and learning",
+        url:"https://www.youtube.com/"
+    }
 
 ];
 
-/* LOCAL STORAGE */
+/* =================================
+   LOCAL STORAGE
+================================= */
 
-let favorites=JSON.parse(localStorage.getItem("mrm_favorites")||"[]");
+function loadFavorites(){
+
+    try{
+
+        const data=JSON.parse(
+            localStorage.getItem("mrm_favorites")||"[]"
+        );
+
+        return Array.isArray(data)?data:[];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+let favorites=loadFavorites();
 
 let language=localStorage.getItem("mrm_language")||"fa";
 
 let theme=localStorage.getItem("mrm_theme")||"dark";
 
-/* CREATE NETWORK CARD */
+/* =================================
+   CREATE NETWORK CARD
+================================= */
 
 function createCard(n){
 
-const fav=favorites.includes(n.id);
+    const fav=favorites.includes(n.id);
 
-return `
-<article class="social-card">
+    return `
 
-<button class="favorite ${fav?'active':''}"
-onclick="toggleFavorite('${n.id}')"
-aria-label="Favorite">
+    <article class="social-card">
 
-${fav?'★':'☆'}
+        <button
+            class="favorite ${fav?'active':''}"
+            onclick="toggleFavorite('${n.id}')"
+            aria-label="Favorite">
 
-</button>
+            ${fav?'★':'☆'}
 
-<div class="social-icon ${n.style}">
-${n.icon}
-</div>
+        </button>
 
-<h4>${n.name}</h4>
+        <div class="social-icon ${n.style}">
+            ${n.icon}
+        </div>
 
-<p>${language==="fa"?n.fa:n.en}</p>
+        <h4>${n.name}</h4>
 
-<button class="open-btn"
-onclick="openSocial('${n.id}')">
+        <p>
+            ${language==="fa"?n.fa:n.en}
+        </p>
 
-${language==="fa"?"باز کردن":"Open"}
+        <button
+            class="open-btn"
+            onclick="openSocial('${n.id}')">
 
-</button>
+            ${language==="fa"?"باز کردن":"Open"}
 
-</article>
-`;
+        </button>
+
+    </article>
+
+    `;
 
 }
 
-/* RENDER HOME CARDS */
+/* =================================
+   RENDER HOME
+================================= */
 
 function renderCards(){
 
-const input=document.getElementById("searchInput");
+    const input=document.getElementById("searchInput");
 
-const q=input.value.trim().toLowerCase();
+    const q=input.value.trim().toLowerCase();
 
-const list=networks.filter(n=>
-(n.name+" "+n.fa+" "+n.en).toLowerCase().includes(q)
-);
+    const list=networks.filter(n=>
 
-document.getElementById("socialGrid").innerHTML=
-list.map(createCard).join("");
+        (n.name+" "+n.fa+" "+n.en)
+        .toLowerCase()
+        .includes(q)
 
-document.getElementById("emptyMessage").style.display=
-list.length?"none":"block";
+    );
 
-document.getElementById("networkCount").textContent=
-language==="fa"
-?list.length+" شبکه"
-:list.length+" Networks";
+    document.getElementById("socialGrid").innerHTML=
+        list.map(createCard).join("");
+
+    document.getElementById("emptyMessage").style.display=
+        list.length?"none":"block";
+
+    document.getElementById("networkCount").textContent=
+        language==="fa"
+        ?list.length+" شبکه"
+        :list.length+" Networks";
 
 }
 
-/* RENDER FAVORITES */
+/* =================================
+   RENDER FAVORITES
+================================= */
 
 function renderFavorites(){
 
-const list=networks.filter(n=>favorites.includes(n.id));
+    const list=networks.filter(n=>
+        favorites.includes(n.id)
+    );
 
-document.getElementById("favoriteGrid").innerHTML=
-list.map(createCard).join("");
+    document.getElementById("favoriteGrid").innerHTML=
+        list.map(createCard).join("");
 
-document.getElementById("favoriteEmpty").style.display=
-list.length?"none":"block";
+    document.getElementById("favoriteEmpty").style.display=
+        list.length?"none":"block";
 
 }
 
-/* TOGGLE FAVORITE */
+/* =================================
+   TOGGLE FAVORITES
+================================= */
 
 function toggleFavorite(id){
 
-favorites=favorites.includes(id)
-?favorites.filter(x=>x!==id)
-:[...favorites,id];
+    favorites=favorites.includes(id)
 
-localStorage.setItem(
-"mrm_favorites",
-JSON.stringify(favorites)
-);
+        ?favorites.filter(x=>x!==id)
 
-renderCards();
-renderFavorites();
+        :[...favorites,id];
+
+    localStorage.setItem(
+        "mrm_favorites",
+        JSON.stringify(favorites)
+    );
+
+    renderCards();
+    renderFavorites();
 
 }
 
-/* OPEN SOCIAL NETWORK */
+/* =================================
+   OPEN SOCIAL NETWORK
+================================= */
 
 function openSocial(id){
 
-const n=networks.find(x=>x.id===id);
+    const n=networks.find(x=>x.id===id);
 
-if(!n)return;
+    if(!n)return;
 
-if(window.Android&&typeof window.Android.openSocial==="function"){
+    try{
 
-window.Android.openSocial(id);
+        if(
+            window.Android &&
+            typeof window.Android.openSocial==="function"
+        ){
 
-}else{
+            window.Android.openSocial(id);
 
-window.open(n.url,"_blank");
+        }else{
 
-}
+            window.open(n.url,"_blank");
 
-}
+        }
 
-/* PAGE NAVIGATION */
+    }catch(error){
 
-function showPage(page){
+        window.location.href=n.url;
 
-document.querySelectorAll(".page").forEach(x=>
-x.classList.remove("active")
-);
-
-document.getElementById(page+"Page").classList.add("active");
-
-document.querySelectorAll(".nav-item").forEach(x=>
-x.classList.remove("active")
-);
-
-const ix={
-home:0,
-favorites:1,
-settings:2,
-about:3
-}[page];
-
-if(ix!==undefined){
-
-document.querySelectorAll(".nav-item")[ix].classList.add("active");
+    }
 
 }
 
-if(page==="favorites")renderFavorites();
+/* =================================
+   PAGE NAVIGATION
+================================= */
+
+function showPage(page,index){
+
+    document.querySelectorAll(".page").forEach(x=>{
+
+        x.classList.remove("active");
+
+    });
+
+    const target=document.getElementById(page+"Page");
+
+    if(!target)return;
+
+    target.classList.add("active");
+
+    document.querySelectorAll(".nav-item").forEach(x=>{
+
+        x.classList.remove("active");
+
+    });
+
+    if(index!==undefined){
+
+        const item=document.querySelectorAll(".nav-item")[index];
+
+        if(item)item.classList.add("active");
+
+    }
+
+    if(page==="favorites"){
+
+        renderFavorites();
+
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
-/* SEARCH BUTTON */
+/* =================================
+   SEARCH BUTTON
+================================= */
 
 function focusSearch(){
 
-showPage("home");
+    showPage("home",2);
 
-document.getElementById("searchInput").focus();
+    const input=document.getElementById("searchInput");
+
+    input.focus();
 
 }
 
-/* LANGUAGE SYSTEM */
+/* =================================
+   LANGUAGE SYSTEM
+================================= */
 
 function setLanguage(lang){
 
-language=lang;
+    if(lang!=="fa" && lang!=="en")return;
 
-localStorage.setItem("mrm_language",lang);
+    language=lang;
 
-document.documentElement.lang=lang;
+    localStorage.setItem("mrm_language",lang);
 
-document.documentElement.dir=
-lang==="fa"?"rtl":"ltr";
+    document.documentElement.lang=lang;
 
-document.querySelectorAll("[data-fa]").forEach(e=>{
+    document.documentElement.dir=
+        lang==="fa"?"rtl":"ltr";
 
-e.textContent=
-lang==="fa"?e.dataset.fa:e.dataset.en;
+    document.querySelectorAll("[data-fa]").forEach(e=>{
 
-});
+        e.textContent=
+            lang==="fa"
+            ?e.dataset.fa
+            :e.dataset.en;
 
-document.getElementById("searchInput").placeholder=
-lang==="fa"
-?"جست‌وجوی شبکه اجتماعی..."
-:"Search social networks...";
+    });
 
-document.getElementById("sectionTitle").textContent=
-lang==="fa"
-?"شبکه‌های اجتماعی"
-:"Social Networks";
+    document.getElementById("searchInput").placeholder=
 
-document.getElementById("emptyMessage").textContent=
-lang==="fa"
-?"شبکه اجتماعی مورد نظر پیدا نشد."
-:"No social network found.";
+        lang==="fa"
+        ?"جست‌وجوی شبکه اجتماعی..."
+        :"Search social networks...";
 
-document.getElementById("favoriteEmpty").textContent=
-lang==="fa"
-?"هنوز شبکه‌ای به علاقه‌مندی‌ها اضافه نکرده‌اید."
-:"You have no favorite networks yet.";
+    document.getElementById("sectionTitle").textContent=
 
-document.getElementById("faButton").classList.toggle(
-"selected",lang==="fa"
-);
+        lang==="fa"
+        ?"شبکه‌های اجتماعی"
+        :"Social Networks";
 
-document.getElementById("enButton").classList.toggle(
-"selected",lang==="en"
-);
+    document.getElementById("emptyMessage").textContent=
 
-document.getElementById("faTop").classList.toggle(
-"selected",lang==="fa"
-);
+        lang==="fa"
+        ?"شبکه اجتماعی مورد نظر پیدا نشد."
+        :"No social network found.";
 
-document.getElementById("enTop").classList.toggle(
-"selected",lang==="en"
-);
+    document.getElementById("favoriteEmpty").textContent=
 
-renderCards();
-renderFavorites();
+        lang==="fa"
+        ?"هنوز شبکه‌ای به علاقه‌مندی‌ها اضافه نکرده‌اید."
+        :"You have no favorite networks yet.";
+
+    document.getElementById("faButton").classList.toggle(
+        "selected",lang==="fa"
+    );
+
+    document.getElementById("enButton").classList.toggle(
+        "selected",lang==="en"
+    );
+
+    document.getElementById("faTop").classList.toggle(
+        "selected",lang==="fa"
+    );
+
+    document.getElementById("enTop").classList.toggle(
+        "selected",lang==="en"
+    );
+
+    renderCards();
+
+    renderFavorites();
 
 }
 
-/* THEME SYSTEM */
+/* =================================
+   THEME SYSTEM
+================================= */
 
 function setTheme(value){
 
-theme=value;
+    if(value!=="dark" && value!=="light")return;
 
-localStorage.setItem("mrm_theme",value);
+    theme=value;
 
-document.body.classList.toggle(
-"light",value==="light"
-);
+    localStorage.setItem("mrm_theme",value);
 
-document.getElementById("darkButton").classList.toggle(
-"selected",value==="dark"
-);
+    document.body.classList.toggle(
+        "light",
+        value==="light"
+    );
 
-document.getElementById("lightButton").classList.toggle(
-"selected",value==="light"
-);
+    document.getElementById("darkButton").classList.toggle(
+        "selected",
+        value==="dark"
+    );
+
+    document.getElementById("lightButton").classList.toggle(
+        "selected",
+        value==="light"
+    );
+
+    const meta=document.querySelector(
+        'meta[name="theme-color"]'
+    );
+
+    if(meta){
+
+        meta.content=
+            value==="dark"?"#080515":"#eee1ff";
+
+    }
 
 }
 
-/* TOGGLE THEME */
+/* =================================
+   TOGGLE THEME
+================================= */
 
 function toggleTheme(){
 
-setTheme(theme==="dark"?"light":"dark");
+    setTheme(
+        theme==="dark"?"light":"dark"
+    );
 
 }
 
-/* INITIALIZATION */
+/* =================================
+   INITIALIZATION
+================================= */
 
 setTheme(theme);
 
