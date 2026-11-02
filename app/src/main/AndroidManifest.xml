@@ -1,40 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"><!-- Internet Access -->
-<uses-permission android:name="android.permission.INTERNET" />
+<?xml version="1.0" encoding="utf-8"?>
 
-<!-- Visibility of Installed Social Applications -->
-<queries>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <package android:name="com.whatsapp" />
-    <package android:name="org.telegram.messenger" />
-    <package android:name="com.instagram.android" />
-    <package android:name="com.facebook.katana" />
-    <package android:name="com.zhiliaoapp.musically" />
-    <package android:name="com.google.android.youtube" />
-    <package android:name="com.twitter.android" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
-</queries>
+    <queries>
+        <package android:name="com.whatsapp" />
+        <package android:name="org.telegram.messenger" />
+        <package android:name="com.instagram.android" />
+        <package android:name="com.facebook.katana" />
+        <package android:name="com.zhiliaoapp.musically" />
+        <package android:name="com.google.android.youtube" />
+        <package android:name="com.twitter.android" />
+    </queries>
 
-<application
-    android:allowBackup="true"
-    android:label="MRM Social Hub"
-    android:theme="@android:style/Theme.Material.Light.NoActionBar"
-    android:usesCleartextTraffic="false"
-    android:supportsRtl="true">
+    <application
+        android:allowBackup="true"
+        android:label="MRM Social Hub"
+        android:icon="@drawable/ic_mrm_launcher"
+        android:roundIcon="@drawable/ic_mrm_launcher"
+        android:theme="@android:style/Theme.Material.Light.NoActionBar"
+        android:usesCleartextTraffic="false"
+        android:supportsRtl="true">
 
-    <activity
-        android:name=".MainActivity"
-        android:exported="true">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
 
-        <intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
-            <action android:name="android.intent.action.MAIN" />
+        </activity>
 
-            <category android:name="android.intent.category.LAUNCHER" />
-
-        </intent-filter>
-
-    </activity>
-
-</application>
+    </application>
 
 </manifest>
