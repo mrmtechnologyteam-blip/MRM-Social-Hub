@@ -1,89 +1,148 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
+<!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0614">
+<title>MRM Social Hub</title><style>
+:root {
+    --bg: #090510;
+    --surface: #140d20;
+    --surface2: #1d1430;
+    --text: #ffffff;
+    --muted: #a99bb9;
+    --primary: #9b20ff;
+    --secondary: #d45cff;
+    --border: rgba(255,255,255,.08);
+    --shadow: 0 12px 35px rgba(0,0,0,.25);
+}
 
-<meta name="theme-color" content="#100d19">
-
-<title>SOCIAL HUB</title>
-
-<style>
+body.light {
+    --bg: #f5f1fa;
+    --surface: #ffffff;
+    --surface2: #eee6f7;
+    --text: #21152e;
+    --muted: #766b81;
+    --border: rgba(40,20,60,.1);
+    --shadow: 0 12px 30px rgba(50,20,80,.08);
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
-}
-
-:root {
-    --bg: #f5f4fa;
-    --card: #ffffff;
-    --text: #191725;
-    --muted: #858194;
-    --accent: #8055ed;
-    --border: #eae7f1;
-}
-
-body.dark {
-    --bg: #100d19;
-    --card: #1b1727;
-    --text: #ffffff;
-    --muted: #aaa3bb;
-    --accent: #a17aff;
-    --border: #30283f;
+    font-family: Arial, Tahoma, sans-serif;
 }
 
 body {
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    transition: .3s;
+    transition: .25s;
+    padding-bottom: 90px;
 }
 
-.container {
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.app {
     max-width: 600px;
     margin: auto;
-    padding: 24px 18px 35px;
+    padding: 20px 17px;
 }
+
+/* HEADER */
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
 }
 
 .logo {
-    font-size: 23px;
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    background: linear-gradient(135deg,#9b20ff,#d45cff,#6f4cff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
     font-weight: 900;
-    letter-spacing: 1px;
+    color: white;
+    box-shadow: 0 5px 20px rgba(155,32,255,.35);
 }
 
-.logo span {
-    color: var(--accent);
+.brand h2 {
+    font-size: 17px;
+    letter-spacing: .3px;
 }
 
-.theme-btn {
-    border: 1px solid var(--border);
-    background: var(--card);
+.brand small {
+    color: var(--muted);
+    font-size: 10px;
+    display: block;
+    margin-top: 4px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 13px;
+    background: var(--surface);
     color: var(--text);
-    width: 43px;
-    height: 43px;
-    border-radius: 14px;
-    font-size: 20px;
-    cursor: pointer;
+    border: 1px solid var(--border);
+    font-size: 17px;
 }
+
+/* HERO */
 
 .hero {
-    background: linear-gradient(135deg,#8055ed,#bd65e8);
+    padding: 26px 22px;
+    border-radius: 23px;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(212,92,255,.35),transparent 40%),
+        linear-gradient(135deg,#26103e,#10091e 70%);
     color: white;
-    padding: 27px 22px;
-    border-radius: 24px;
-    margin-bottom: 28px;
-    box-shadow: 0 12px 30px #8055ed30;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 25px;
+}
+
+.hero::after {
+    content: "MRM";
+    position: absolute;
+    left: -12px;
+    bottom: -28px;
+    font-size: 95px;
+    font-weight: 900;
+    opacity: .045;
+}
+
+.hero-tag {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.12);
+    font-size: 10px;
+    margin-bottom: 15px;
 }
 
 .hero h1 {
@@ -92,391 +151,852 @@ body {
 }
 
 .hero p {
-    font-size: 13px;
+    font-size: 12px;
+    color: #d7c5e7;
     line-height: 1.9;
-    opacity: .9;
+    max-width: 310px;
 }
 
-.section-title {
-    font-size: 17px;
-    font-weight: bold;
-    margin-bottom: 17px;
+/* SEARCH */
+
+.search-box {
+    margin-bottom: 24px;
+    position: relative;
 }
 
-.apps {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 13px;
-}
-
-.app {
-    background: var(--card);
+.search-box input {
+    width: 100%;
+    height: 49px;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 20px 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: .2s;
+    border-radius: 15px;
     color: var(--text);
+    padding: 0 45px 0 15px;
+    outline: none;
+    font-size: 13px;
+}
+
+.search-box input:focus {
+    border-color: var(--primary);
+}
+
+.search-icon {
+    position: absolute;
+    right: 16px;
+    top: 14px;
+    color: var(--muted);
+}
+
+/* SECTION */
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.section-heading h3 {
+    font-size: 16px;
+}
+
+.section-heading span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* SOCIAL GRID */
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
+}
+
+.social-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 19px;
+    padding: 17px 13px;
+    position: relative;
+    transition: transform .2s,border .2s;
+    box-shadow: var(--shadow);
     min-width: 0;
 }
 
-.app:active {
-    transform: scale(.94);
+.social-card:active {
+    transform: scale(.97);
 }
 
-.icon {
-    width: 55px;
-    height: 55px;
-    margin: 0 auto 12px;
-    border-radius: 18px;
+.social-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.social-icon {
+    width: 47px;
+    height: 47px;
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 23px;
+    font-size: 20px;
     font-weight: bold;
 }
 
-.app-name {
-    font-size: 13px;
-    font-weight: bold;
-    direction: ltr;
-}
+.whatsapp { background: #20c76a; }
+.telegram { background: #229ed9; }
+.instagram { background: linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5); }
+.facebook { background: #1877f2; }
+.tiktok { background: #111; border: 1px solid #555; }
+.youtube { background: #ff0033; }
+.x-social { background: #111; border: 1px solid #555; }
 
-.wa { background: #25D366; }
-.tg { background: #229ED9; }
-.ig { background: linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5); }
-.fb { background: #1877F2; }
-.tt { background: #111111; }
-.yt { background: #FF0033; }
-.xx { background: #000000; }
-
-.footer {
-    text-align: center;
-    margin-top: 35px;
+.favorite {
+    border: none;
+    background: transparent;
     color: var(--muted);
-    font-size: 11px;
-    line-height: 2;
+    font-size: 20px;
+    padding: 3px;
 }
 
-.dialog-bg {
-    position: fixed;
-    inset: 0;
-    background: #0009;
+.favorite.active {
+    color: #ffc342;
+}
+
+.social-card h4 {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.social-card p {
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 14px;
+}
+
+.open-btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    background: linear-gradient(100deg,#7921d7,#b33aff);
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* EMPTY */
+
+.empty {
     display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    text-align: center;
+    padding: 30px 10px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 8px calc(12px + env(safe-area-inset-bottom));
+    background: var(--surface);
+    border-top: 1px solid var(--border);
     z-index: 10;
 }
 
-.dialog {
-    background: var(--card);
-    color: var(--text);
-    width: 100%;
-    max-width: 340px;
-    padding: 25px;
-    border-radius: 23px;
-    text-align: center;
+.nav-item {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    min-width: 55px;
 }
 
-.dialog h3 {
+.nav-item b {
+    font-size: 19px;
+    font-weight: normal;
+}
+
+.nav-item.active {
+    color: var(--secondary);
+}
+
+/* PAGES */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* SETTINGS */
+
+.setting-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 17px;
     margin-bottom: 12px;
 }
 
-.dialog p {
+.setting-card h4 {
+    font-size: 14px;
+    margin-bottom: 9px;
+}
+
+.setting-card p {
+    font-size: 11px;
     color: var(--muted);
-    font-size: 13px;
-    line-height: 1.8;
-    margin-bottom: 20px;
+    line-height: 1.9;
 }
 
-.dialog button {
-    display: block;
-    width: 100%;
-    padding: 13px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
 }
 
-.primary {
-    background: var(--accent);
+.setting-row button {
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+    padding: 9px 13px;
+    border-radius: 10px;
+    font-size: 11px;
+}
+
+.setting-row button.selected {
+    background: var(--primary);
     color: white;
 }
 
-.secondary {
-    background: var(--bg);
-    color: var(--text);
+.about-logo {
+    width: 85px;
+    height: 85px;
+    border-radius: 25px;
+    background: linear-gradient(135deg,#9b20ff,#d45cff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: 900;
+    margin: 10px auto 20px;
+    box-shadow: 0 10px 30px rgba(155,32,255,.3);
 }
 
-</style>
-</head>
+.about-box {
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 25px 18px;
+}
 
-<body>
+.about-box h2 {
+    margin-bottom: 10px;
+    font-size: 19px;
+}
 
-<div class="container">
+.about-box p {
+    color: var(--muted);
+    line-height: 2;
+    font-size: 12px;
+}
 
-    <header class="header">
+.version {
+    margin-top: 22px;
+    font-size: 11px;
+    color: var(--secondary);
+}
 
-        <div class="logo">
-            SOCIAL <span>HUB</span>
-        </div>
+/* FOOTER */
 
-        <button class="theme-btn" onclick="changeTheme()" id="themeBtn">
-            ☾
-        </button>
+.footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 30px;
+    line-height: 2;
+}
 
-    </header>
-
-
-    <section class="hero">
-
-        <h1>همه شبکه‌ها، یک‌جا!</h1>
-
-        <p>
-            تمام شبکه‌های اجتماعی مورد علاقه‌ات
-            را از یک مکان مدیریت و اجرا کن.
-        </p>
-
-    </section>
-
-
-    <h2 class="section-title">
-        شبکه‌های اجتماعی
-    </h2>
-
-
-    <div class="apps">
-
-        <div class="app" onclick="openSocial('whatsapp')">
-            <div class="icon wa">WA</div>
-            <div class="app-name">WhatsApp</div>
-        </div>
-
-        <div class="app" onclick="openSocial('telegram')">
-            <div class="icon tg">TG</div>
-            <div class="app-name">Telegram</div>
-        </div>
-
-        <div class="app" onclick="openSocial('instagram')">
-            <div class="icon ig">IG</div>
-            <div class="app-name">Instagram</div>
-        </div>
-
-        <div class="app" onclick="openSocial('facebook')">
-            <div class="icon fb">f</div>
-            <div class="app-name">Facebook</div>
-        </div>
-
-        <div class="app" onclick="openSocial('tiktok')">
-            <div class="icon tt">♪</div>
-            <div class="app-name">TikTok</div>
-        </div>
-
-        <div class="app" onclick="openSocial('youtube')">
-            <div class="icon yt">▶</div>
-            <div class="app-name">YouTube</div>
-        </div>
-
-        <div class="app" onclick="openSocial('x')">
-            <div class="icon xx">𝕏</div>
-            <div class="app-name">X</div>
-        </div>
-
-    </div>
-
-
-    <footer class="footer">
-
-        SOCIAL HUB V1.0<br>
-        All Your Social Networks. One Place.
-
-    </footer>
-
-</div>
-
-
-<div class="dialog-bg" id="dialogBg">
-
-    <div class="dialog">
-
-        <h3 id="dialogTitle">انتخاب روش ورود</h3>
-
-        <p id="dialogText">
-            چگونه می‌خواهید وارد این شبکه اجتماعی شوید؟
-        </p>
-
-        <button class="primary" onclick="openStore()">
-            نصب از Google Play
-        </button>
-
-        <button class="secondary" onclick="openWeb()">
-            استفاده از نسخه وب
-        </button>
-
-        <button class="secondary" onclick="closeDialog()">
-            بستن
-        </button>
-
-    </div>
-
-</div>
-
-
-<script>
-
-const socials = {
-
-    whatsapp: {
-        name: "WhatsApp",
-        package: "com.whatsapp",
-        web: "https://web.whatsapp.com/"
-    },
-
-    telegram: {
-        name: "Telegram",
-        package: "org.telegram.messenger",
-        web: "https://web.telegram.org/"
-    },
-
-    instagram: {
-        name: "Instagram",
-        package: "com.instagram.android",
-        web: "https://www.instagram.com/"
-    },
-
-    facebook: {
-        name: "Facebook",
-        package: "com.facebook.katana",
-        web: "https://www.facebook.com/"
-    },
-
-    tiktok: {
-        name: "TikTok",
-        package: "com.zhiliaoapp.musically",
-        web: "https://www.tiktok.com/"
-    },
-
-    youtube: {
-        name: "YouTube",
-        package: "com.google.android.youtube",
-        web: "https://m.youtube.com/"
-    },
-
-    x: {
-        name: "X",
-        package: "com.twitter.android",
-        web: "https://x.com/"
+@media(max-width:350px) {
+    .social-grid {
+        gap: 8px;
     }
 
-};
+    .social-card {
+        padding: 13px 10px;
+    }
+
+    .hero h1 {
+        font-size: 21px;
+    }
+}
+</style></head><body><div class="app"><header class="header">
+
+    <div class="brand">
+        <div class="logo">MRM</div>
+        <div>
+            <h2>MRM SOCIAL HUB</h2>
+            <small>DIGITAL CONNECTION</small>
+        </div>
+    </div>
+
+    <div class="header-actions">
+        <button class="icon-btn" onclick="toggleTheme()" aria-label="Theme">◐</button>
+        <button class="icon-btn" onclick="showPage('settings')" aria-label="Settings">⚙</button>
+    </div>
+
+</header>
+
+<!-- HOME PAGE -->
+
+<main id="homePage" class="page active">
+
+    <section class="hero">
+        <span class="hero-tag" data-fa="نسخه ۲.۰" data-en="VERSION 2.0">نسخه ۲.۰</span>
+
+        <h1 data-fa="دنیای ارتباطات، یک‌جا!" data-en="Your Social World, One Place!">
+            دنیای ارتباطات، یک‌جا!
+        </h1>
+
+        <p data-fa="به MRM Social Hub خوش آمدید. شبکه‌های اجتماعی مورد علاقه خود را سریع‌تر و آسان‌تر باز کنید."
+           data-en="Welcome to MRM Social Hub. Access your favorite social networks faster and easier.">
+            به MRM Social Hub خوش آمدید. شبکه‌های اجتماعی مورد علاقه خود را سریع‌تر و آسان‌تر باز کنید.
+        </p>
+    </section>
+
+    <div class="search-box">
+        <span class="search-icon">⌕</span>
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="جست‌وجوی شبکه اجتماعی..."
+            oninput="renderCards()">
+    </div>
+
+    <div class="section-heading">
+        <h3 id="sectionTitle">شبکه‌های اجتماعی</h3>
+        <span id="networkCount">۷ شبکه</span>
+    </div>
+
+    <section class="social-grid" id="socialGrid"></section>
+
+    <div class="empty" id="emptyMessage">
+        شبکه اجتماعی مورد نظر پیدا نشد.
+    </div>
+
+</main>
+
+<!-- FAVORITES PAGE -->
+
+<main id="favoritesPage" class="page">
+
+    <div class="section-heading">
+        <h3 data-fa="علاقه‌مندی‌های من" data-en="My Favorites">علاقه‌مندی‌های من</h3>
+        <span data-fa="شبکه‌های منتخب" data-en="Selected Networks">شبکه‌های منتخب</span>
+    </div>
+
+    <section class="social-grid" id="favoriteGrid"></section>
+
+    <div class="empty" id="favoriteEmpty">
+        هنوز شبکه‌ای به علاقه‌مندی‌ها اضافه نکرده‌اید.
+    </div>
+
+</main>
+
+<!-- SETTINGS PAGE -->
+
+<main id="settingsPage" class="page">
+
+    <div class="section-heading">
+        <h3 data-fa="تنظیمات برنامه" data-en="App Settings">تنظیمات برنامه</h3>
+    </div>
+
+    <div class="setting-card">
+        <h4 data-fa="🌐 زبان برنامه" data-en="🌐 App Language">🌐 زبان برنامه</h4>
+
+        <p data-fa="زبان مورد نظر خود را انتخاب کنید."
+           data-en="Choose your preferred language.">
+            زبان مورد نظر خود را انتخاب کنید.
+        </p>
+
+        <div class="setting-row">
+            <button onclick="setLanguage('fa')" id="faButton" class="selected">فارسی</button>
+            <button onclick="setLanguage('en')" id="enButton">English</button>
+        </div>
+    </div>
+
+    <div class="setting-card">
+        <h4 data-fa="🎨 ظاهر برنامه" data-en="🎨 Appearance">🎨 ظاهر برنامه</h4>
+
+        <p data-fa="حالت روشن یا تاریک را انتخاب کنید."
+           data-en="Choose light or dark mode.">
+            حالت روشن یا تاریک را انتخاب کنید.
+        </p>
+
+        <div class="setting-row">
+            <button onclick="setTheme('dark')" id="darkButton" class="selected">تاریک</button>
+            <button onclick="setTheme('light')" id="lightButton">روشن</button>
+        </div>
+    </div>
+
+    <div class="setting-card">
+        <h4 data-fa="❤️ علاقه‌مندی‌ها" data-en="❤️ Favorites">❤️ علاقه‌مندی‌ها</h4>
+        <p data-fa="با انتخاب علامت ستاره روی هر شبکه، آن را به فهرست علاقه‌مندی‌های خود اضافه کنید."
+           data-en="Tap the star on a network card to add it to your favorites.">
+            با انتخاب علامت ستاره روی هر شبکه، آن را به فهرست علاقه‌مندی‌های خود اضافه کنید.
+        </p>
+    </div>
+
+    <div class="setting-card">
+        <h4 data-fa="📱 اطلاعات برنامه" data-en="📱 App Information">📱 اطلاعات برنامه</h4>
+
+        <div class="setting-row">
+            <span data-fa="نسخه برنامه" data-en="App Version">نسخه برنامه</span>
+            <span>2.0</span>
+        </div>
+    </div>
+
+</main>
+
+<!-- ABOUT PAGE -->
+
+<main id="aboutPage" class="page">
+
+    <div class="about-box">
+
+        <div class="about-logo">MRM</div>
+
+        <h2>MRM Social Hub</h2>
+
+        <p data-fa="یک پلتفرم ساده و کاربردی برای دسترسی سریع به شبکه‌های اجتماعی محبوب شما."
+           data-en="A simple and useful platform for quick access to your favorite social networks.">
+            یک پلتفرم ساده و کاربردی برای دسترسی سریع به شبکه‌های اجتماعی محبوب شما.
+        </p>
+
+        <div class="version">VERSION 2.0</div>
+
+        <p style="margin-top:20px">
+            MRM Technology Team<br>
+            Digital Solutions
+        </p>
+
+    </div>
+
+</main>
+
+<footer class="footer">
+    MRM TECHNOLOGY TEAM<br>
+    DIGITAL SOLUTIONS
+</footer>
+
+</div><!-- BOTTOM NAVIGATION --><nav class="bottom-nav"><button class="nav-item active" onclick="showPage('home')">
+    <b>⌂</b>
+    <span data-fa="خانه" data-en="Home">خانه</span>
+</button>
+
+<button class="nav-item" onclick="showPage('favorites')">
+    <b>☆</b>
+    <span data-fa="علاقه‌مندی" data-en="Favorites">علاقه‌مندی</span>
+</button>
+
+<button class="nav-item" onclick="showPage('settings')">
+    <b>⚙</b>
+    <span data-fa="تنظیمات" data-en="Settings">تنظیمات</span>
+</button>
+
+<button class="nav-item" onclick="showPage('about')">
+    <b>ⓘ</b>
+    <span data-fa="درباره ما" data-en="About">درباره ما</span>
+</button>
+
+</nav><script>
+
+/* SOCIAL NETWORK DATA */
+
+const networks = [
+
+    {
+        id: "whatsapp",
+        name: "WhatsApp",
+        icon: "W",
+        style: "whatsapp",
+        fa: "پیام‌رسان واتساپ",
+        en: "Messaging and calls",
+        url: "https://www.whatsapp.com/"
+    },
+
+    {
+        id: "telegram",
+        name: "Telegram",
+        icon: "➤",
+        style: "telegram",
+        fa: "پیام‌رسان تلگرام",
+        en: "Fast messaging platform",
+        url: "https://web.telegram.org/"
+    },
+
+    {
+        id: "instagram",
+        name: "Instagram",
+        icon: "◎",
+        style: "instagram",
+        fa: "اشتراک‌گذاری عکس و ویدیو",
+        en: "Photos and videos",
+        url: "https://www.instagram.com/"
+    },
+
+    {
+        id: "facebook",
+        name: "Facebook",
+        icon: "f",
+        style: "facebook",
+        fa: "شبکه اجتماعی فیسبوک",
+        en: "Connect with people",
+        url: "https://www.facebook.com/"
+    },
+
+    {
+        id: "tiktok",
+        name: "TikTok",
+        icon: "♪",
+        style: "tiktok",
+        fa: "ویدیوهای کوتاه و سرگرمی",
+        en: "Short videos and entertainment",
+        url: "https://www.tiktok.com/"
+    },
+
+    {
+        id: "youtube",
+        name: "YouTube",
+        icon: "▶",
+        style: "youtube",
+        fa: "تماشای ویدیو و آموزش",
+        en: "Videos and learning",
+        url: "https://www.youtube.com/"
+    },
+
+    {
+        id: "x",
+        name: "X",
+        icon: "𝕏",
+        style: "x-social",
+        fa: "اخبار و گفتگوهای آنلاین",
+        en: "News and conversations",
+        url: "https://x.com/"
+    }
+
+];
 
 
-let selectedSocial = null;
+/* STORAGE */
+
+let favorites = JSON.parse(
+    localStorage.getItem("mrm_favorites") || "[]"
+);
+
+let language = localStorage.getItem("mrm_language") || "fa";
+
+let theme = localStorage.getItem("mrm_theme") || "dark";
+
+let currentPage = "home";
 
 
-function openSocial(name) {
+/* CARD GENERATOR */
 
-    selectedSocial = socials[name];
+function createCard(network) {
 
-    if (!selectedSocial) return;
+    const favorite = favorites.includes(network.id);
 
-    // ارتباط با Android Native
+    const description = language === "fa"
+        ? network.fa
+        : network.en;
 
-    if (
-        window.Android &&
-        typeof Android.openSocial === "function"
-    ) {
+    return `
+        <article class="social-card">
 
-        Android.openSocial(name);
+            <div class="social-top">
+
+                <div class="social-icon ${network.style}">
+                    ${network.icon}
+                </div>
+
+                <button
+                    class="favorite ${favorite ? "active" : ""}"
+                    onclick="toggleFavorite('${network.id}')"
+                    aria-label="Favorite">
+                    ${favorite ? "★" : "☆"}
+                </button>
+
+            </div>
+
+            <h4>${network.name}</h4>
+
+            <p>${description}</p>
+
+            <button
+                class="open-btn"
+                onclick="openSocial('${network.id}')">
+
+                ${language === "fa" ? "باز کردن شبکه" : "Open Network"}
+
+            </button>
+
+        </article>
+    `;
+}
+
+
+/* RENDER HOME */
+
+function renderCards() {
+
+    const grid = document.getElementById("socialGrid");
+
+    const search = document
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const filtered = networks.filter(network => {
+
+        const searchable =
+            network.name.toLowerCase() + " " +
+            network.fa.toLowerCase() + " " +
+            network.en.toLowerCase();
+
+        return searchable.includes(search);
+    });
+
+    grid.innerHTML = filtered.map(createCard).join("");
+
+    document.getElementById("emptyMessage").style.display =
+        filtered.length ? "none" : "block";
+
+    document.getElementById("networkCount").textContent =
+        language === "fa"
+            ? filtered.length + " شبکه"
+            : filtered.length + " Networks";
+}
+
+
+/* FAVORITES */
+
+function toggleFavorite(id) {
+
+    if (favorites.includes(id)) {
+
+        favorites = favorites.filter(item => item !== id);
 
     } else {
 
-        showDialog();
-
+        favorites.push(id);
     }
-
-}
-
-
-function showDialog() {
-
-    document.getElementById("dialogTitle").innerText =
-        selectedSocial.name;
-
-    document.getElementById("dialogBg").style.display =
-        "flex";
-
-}
-
-
-function closeDialog() {
-
-    document.getElementById("dialogBg").style.display =
-        "none";
-
-}
-
-
-function openStore() {
-
-    if (!selectedSocial) return;
-
-    const url =
-        "https://play.google.com/store/apps/details?id=" +
-        selectedSocial.package;
-
-    window.open(url, "_blank");
-
-}
-
-
-function openWeb() {
-
-    if (!selectedSocial) return;
-
-    window.open(selectedSocial.web, "_blank");
-
-}
-
-
-function changeTheme() {
-
-    const isDark = document.body.classList.toggle("dark");
 
     localStorage.setItem(
-        "socialhub-theme",
-        isDark ? "dark" : "light"
+        "mrm_favorites",
+        JSON.stringify(favorites)
     );
 
-    document.getElementById("themeBtn").innerText =
-        isDark ? "☀" : "☾";
-
+    renderCards();
+    renderFavorites();
 }
 
 
-function loadTheme() {
+function renderFavorites() {
 
-    const theme = localStorage.getItem("socialhub-theme");
+    const grid = document.getElementById("favoriteGrid");
 
-    if (theme === "dark") {
+    const selected = networks.filter(network =>
+        favorites.includes(network.id)
+    );
 
-        document.body.classList.add("dark");
+    grid.innerHTML = selected.map(createCard).join("");
 
-        document.getElementById("themeBtn").innerText = "☀";
+    document.getElementById("favoriteEmpty").style.display =
+        selected.length ? "none" : "block";
+}
 
+
+/* OPEN SOCIAL */
+
+function openSocial(id) {
+
+    const network = networks.find(item => item.id === id);
+
+    if (!network) return;
+
+    if (
+        window.Android &&
+        typeof window.Android.openSocial === "function"
+    ) {
+
+        window.Android.openSocial(id);
+
+    } else {
+
+        window.location.href = network.url;
+    }
+}
+
+
+/* PAGE NAVIGATION */
+
+function showPage(page) {
+
+    currentPage = page;
+
+    document.querySelectorAll(".page").forEach(item => {
+        item.classList.remove("active");
+    });
+
+    const selected = document.getElementById(page + "Page");
+
+    if (selected) {
+        selected.classList.add("active");
     }
 
+    document.querySelectorAll(".nav-item").forEach(item => {
+        item.classList.remove("active");
+    });
+
+    const buttons = document.querySelectorAll(".nav-item");
+
+    const pageIndex = {
+        home: 0,
+        favorites: 1,
+        settings: 2,
+        about: 3
+    };
+
+    buttons[pageIndex[page]].classList.add("active");
+
+    if (page === "favorites") {
+        renderFavorites();
+    }
 }
 
 
-loadTheme();
+/* LANGUAGE */
 
-</script>
+function setLanguage(lang) {
 
-</body>
+    language = lang;
+
+    localStorage.setItem("mrm_language", lang);
+
+    document.documentElement.lang = lang;
+
+    document.documentElement.dir =
+        lang === "fa" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-fa]").forEach(element => {
+
+        element.textContent =
+            lang === "fa"
+                ? element.getAttribute("data-fa")
+                : element.getAttribute("data-en");
+
+    });
+
+    document.getElementById("searchInput").placeholder =
+        lang === "fa"
+            ? "جست‌وجوی شبکه اجتماعی..."
+            : "Search social networks...";
+
+    document.getElementById("sectionTitle").textContent =
+        lang === "fa"
+            ? "شبکه‌های اجتماعی"
+            : "Social Networks";
+
+    document.getElementById("emptyMessage").textContent =
+        lang === "fa"
+            ? "شبکه اجتماعی مورد نظر پیدا نشد."
+            : "No social network found.";
+
+    document.getElementById("favoriteEmpty").textContent =
+        lang === "fa"
+            ? "هنوز شبکه‌ای به علاقه‌مندی‌ها اضافه نکرده‌اید."
+            : "You have no favorite networks yet.";
+
+    document.getElementById("faButton").classList.toggle(
+        "selected", lang === "fa"
+    );
+
+    document.getElementById("enButton").classList.toggle(
+        "selected", lang === "en"
+    );
+
+    renderCards();
+    renderFavorites();
+}
+
+
+/* THEME */
+
+function setTheme(value) {
+
+    theme = value;
+
+    localStorage.setItem("mrm_theme", value);
+
+    document.body.classList.toggle(
+        "light",
+        value === "light"
+    );
+
+    document.getElementById("darkButton").classList.toggle(
+        "selected", value === "dark"
+    );
+
+    document.getElementById("lightButton").classList.toggle(
+        "selected", value === "light"
+    );
+}
+
+
+function toggleTheme() {
+
+    setTheme(theme === "dark" ? "light" : "dark");
+}
+
+
+/* INITIALIZATION */
+
+function initializeApp() {
+
+    setTheme(theme);
+
+    setLanguage(language);
+
+    renderCards();
+
+    renderFavorites();
+}
+
+initializeApp();
+
+</script></body>
 </html>
